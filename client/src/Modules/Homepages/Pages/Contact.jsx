@@ -2,7 +2,7 @@ import React from "react";
 import { MapPin, Mail, Phone, Clock, ArrowRight } from "lucide-react";
 // ✅ 1. Import Context and Data
 import { useLanguage } from "../../../context/LanguageContext";
-import { contactData } from "../../../data/contact";
+import { contactData } from "../../../data/Contact";
 
 const Contact = () => {
   // ✅ 2. Get Language Data
