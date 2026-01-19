@@ -4,7 +4,7 @@ import Logo from "../../../assets/npf-logo.jpeg";
 import { FaFacebookF, FaTwitter, FaInstagram, FaYoutube } from "react-icons/fa";
 // ✅ 1. Import Context and Data
 import { useLanguage } from "../../../context/LanguageContext";
-import { footerData } from "../../../data/footer";
+import { footerData } from "../../../data/Footer";
 
 const Footer = () => {
   // ✅ 2. Get Language and Data
