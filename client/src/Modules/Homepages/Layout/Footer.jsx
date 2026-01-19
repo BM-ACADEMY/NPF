@@ -1,15 +1,31 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Logo from "../../../assets/npf-logo.jpeg";
-import { FaFacebookF, FaTwitter, FaInstagram, FaYoutube } from "react-icons/fa";
+import { FaFacebookF, FaTwitter, FaInstagram, FaYoutube, FaArrowRight, FaMapMarkerAlt, FaEnvelope, FaPhone } from "react-icons/fa";
+
 // ✅ 1. Import Context and Data
 import { useLanguage } from "../../../context/LanguageContext";
 import { footerData } from "../../../data/Footer";
+
+// --- Custom Vector Background (Abstract Network Grid) ---
+const FooterNetworkBackground = () => (
+  <div className="absolute inset-0 pointer-events-none opacity-[0.05]">
+    <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="footer-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+          <path d="M0 40L40 0H20L0 20M40 40V20L20 40" stroke="#F59E0B" strokeWidth="1" fill="none"/>
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#footer-grid)" />
+    </svg>
+  </div>
+);
 
 const Footer = () => {
   // ✅ 2. Get Language and Data
   const { language, t: navTranslations } = useLanguage();
   const f = footerData[language] || footerData['en'];
+  const isTamil = language === 'ta';
 
   // Use translations from main file for consistency in menu naming
   const menuItems = [
@@ -25,66 +41,77 @@ const Footer = () => {
       name: "Facebook",
       icon: <FaFacebookF />,
       link: "https://www.facebook.com/swaminathan1105",
-      hover: "hover:bg-[#1877F2]",
+      color: "hover:bg-[#1877F2]",
     },
     {
       name: "X (Twitter)",
       icon: <FaTwitter />,
       link: "https://x.com/c_pondy?t=kaIyholWlGDvDTB5xGFqQ&s=09",
-      hover: "hover:bg-black",
+      color: "hover:bg-black",
     },
     {
       name: "Instagram",
       icon: <FaInstagram />,
       link: "https://www.instagram.com/c.s.swamynathan/",
-      hover: "hover:bg-[#E1306C]",
+      color: "hover:bg-[#E1306C]",
     },
     {
       name: "YouTube",
       icon: <FaYoutube />,
       link: "https://www.youtube.com/@swaminathan506",
-      hover: "hover:bg-[#FF0000]",
+      color: "hover:bg-[#FF0000]",
     },
   ];
 
   return (
-    <footer className="relative bg-[#0f172a] text-white pt-20 pb-10 overflow-hidden border-t-[6px] border-[#dc2626]">
+    <footer className="relative bg-[#0F224A] text-white pt-20 pb-8 overflow-hidden border-t-[6px] border-[#F59E0B]">
 
-      {/* Background texture */}
-      <div className="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px] opacity-[0.03] pointer-events-none"></div>
+      {/* Tamil Font Import */}
+      <style>
+        {`
+          @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;500;600;700;800&display=swap');
+          .font-tamil { font-family: 'Noto Sans Tamil', sans-serif; }
+        `}
+      </style>
+
+      {/* Background Pattern */}
+      <FooterNetworkBackground />
+
+      {/* Dark overlay for readability */}
+      <div className="absolute inset-0 bg-[#0F224A]/90 pointer-events-none"></div>
 
       <div className="container mx-auto px-6 md:px-12 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
 
-          {/* Brand */}
-          <div className="lg:col-span-2 space-y-6">
-            <Link to="/" className="flex items-center gap-4 group">
-              <div className="bg-white p-1 rounded-full">
+          {/* === 1. BRAND & DESCRIPTION === */}
+          <div className="lg:col-span-2 space-y-8">
+            <Link to="/" className="flex items-start gap-4 group">
+              <div className="bg-white p-1 rounded-full shrink-0">
                 <img
                   src={Logo}
                   alt="npf Logo"
-                  className="w-12 h-12 md:w-14 md:h-14 object-contain"
+                  className="w-14 h-14 object-contain"
                 />
               </div>
               <div>
-                <span className="text-gray-400 text-xs font-bold tracking-widest uppercase">
-                  {f.officialSite}
+                <span className={`text-[#F59E0B] font-bold block mb-1 opacity-80 ${isTamil ? 'font-tamil text-xs' : 'text-[10px] uppercase tracking-[0.2em]'}`}>
+                  {f.officialSite || "Official Website"}
                 </span>
-                <h2 className="font-black text-xl md:text-2xl group-hover:text-[#3b82f6] transition">
+                <h2 className={`font-black text-2xl md:text-3xl leading-none text-white group-hover:text-[#F59E0B] transition-colors ${isTamil ? 'font-tamil' : 'uppercase tracking-tighter'}`}>
                   {navTranslations.nav.menuTitle}
                 </h2>
-                <p className="text-sm text-gray-300">
+                <p className={`text-sm text-gray-400 mt-1 font-medium ${isTamil ? 'font-tamil' : 'tracking-wide'}`}>
                   {f.subtitle}
                 </p>
               </div>
             </Link>
 
-            <p className="text-gray-400 max-w-md text-sm leading-relaxed">
+            <p className={`text-gray-300 max-w-lg leading-relaxed border-l-4 border-[#F59E0B] pl-4 ${isTamil ? 'font-tamil text-sm' : 'text-sm'}`}>
               {f.description}
             </p>
 
-            {/* Social Icons */}
-            <div className="flex gap-4 pt-2">
+            {/* Social Icons - Gold Hover */}
+            <div className="flex gap-3 pt-2">
               {socialLinks.map((item, i) => (
                 <a
                   key={i}
@@ -92,7 +119,7 @@ const Footer = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={item.name}
-                  className={`w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-white transition-all duration-300 hover:-translate-y-1 ${item.hover}`}
+                  className={`w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white transition-all duration-300 hover:-translate-y-1 hover:text-white ${item.color}`}
                 >
                   {item.icon}
                 </a>
@@ -100,19 +127,19 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Quick Links */}
+          {/* === 2. QUICK LINKS === */}
           <div>
-            <h3 className="text-lg font-bold mb-6 border-l-4 border-[#0056b3] pl-3 uppercase">
-              {f.quickLinksTitle}
+            <h3 className={`text-xl font-bold mb-8 text-white flex items-center gap-2 ${isTamil ? 'font-tamil' : 'uppercase tracking-widest text-sm'}`}>
+              <span className="w-8 h-[2px] bg-[#F59E0B]"></span> {f.quickLinksTitle}
             </h3>
-            <ul className="space-y-3">
+            <ul className="space-y-4">
               {menuItems.map((item) => (
                 <li key={item.name}>
                   <Link
                     to={item.path}
-                    className="text-gray-400 hover:text-white hover:pl-2 transition-all flex items-center gap-2"
+                    className={`group flex items-center gap-3 text-gray-400 hover:text-[#F59E0B] transition-all hover:pl-2 ${isTamil ? 'font-tamil text-sm' : 'uppercase tracking-wide text-xs font-bold'}`}
                   >
-                    <span className="text-[#dc2626] text-xs">➤</span>
+                    <FaArrowRight className="text-[#F59E0B] opacity-0 group-hover:opacity-100 transition-opacity text-[10px]" />
                     {item.name}
                   </Link>
                 </li>
@@ -120,45 +147,50 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Get Involved */}
+          {/* === 3. GET INVOLVED (Actions) === */}
           <div>
-            <h3 className="text-lg font-bold mb-6 border-l-4 border-[#dc2626] pl-3 uppercase">
-              {f.getInvolvedTitle}
+            <h3 className={`text-xl font-bold mb-8 text-white flex items-center gap-2 ${isTamil ? 'font-tamil' : 'uppercase tracking-widest text-sm'}`}>
+              <span className="w-8 h-[2px] bg-[#F59E0B]"></span> {f.getInvolvedTitle}
             </h3>
-            <p className="text-gray-400 text-sm mb-6">
+            <p className={`text-gray-400 mb-6 leading-relaxed ${isTamil ? 'font-tamil text-sm' : 'text-xs'}`}>
               {f.getInvolvedDesc}
             </p>
 
-            <Link
-              to="/license"
-              className="block text-center bg-[#dc2626] hover:bg-[#b91c1c] px-6 py-3 rounded-lg font-bold uppercase text-sm transition hover:-translate-y-1"
-            >
-              {f.memberBtn}
-            </Link>
+            <div className="flex flex-col gap-4">
+                {/* Primary Button: Solid Gold */}
+                <Link
+                to="/license"
+                className={`block text-center bg-[#F59E0B] hover:bg-amber-400 text-[#0F224A] px-6 py-3.5 rounded font-bold transition hover:-translate-y-1 shadow-lg ${isTamil ? 'font-tamil text-sm' : 'uppercase tracking-widest text-xs'}`}
+                >
+                {f.memberBtn}
+                </Link>
 
-            <Link
-              to="/complaint"
-              className="block mt-3 text-center border border-slate-600 hover:border-white px-6 py-3 rounded-lg font-bold uppercase text-sm text-gray-300 hover:text-white transition"
-            >
-              {f.complaintBtn}
-            </Link>
+                {/* Secondary Button: Transparent White Border */}
+                <Link
+                to="/complaint"
+                className={`block text-center border border-gray-600 hover:border-[#F59E0B] hover:text-[#F59E0B] text-gray-300 px-6 py-3.5 rounded font-bold transition ${isTamil ? 'font-tamil text-sm' : 'uppercase tracking-widest text-xs'}`}
+                >
+                {f.complaintBtn}
+                </Link>
+            </div>
           </div>
         </div>
 
-        {/* Footer bottom */}
-        <div className="border-t border-slate-800 pt-8 text-center">
-          <p className="text-gray-400 text-sm">
-            © {new Date().getFullYear()} <span className="text-white font-semibold">npf</span>.
-            {f.allRights}
-            <br />
+        {/* === FOOTER BOTTOM === */}
+        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
+          <p className={`text-gray-500 text-xs ${isTamil ? 'font-tamil' : 'uppercase tracking-wider'}`}>
+            © {new Date().getFullYear()} <span className="text-white font-bold">NPF</span>. {f.allRights}
+          </p>
+
+          <p className={`text-gray-500 text-xs ${isTamil ? 'font-tamil' : ''}`}>
             {f.developedBy}{" "}
             <a
               href="https://bmtechx.in/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#dc2626] font-bold hover:text-white underline-offset-4 hover:underline"
+              className="text-[#F59E0B] font-bold hover:text-white transition-colors uppercase tracking-wider"
             >
-              bmtechx.in
+              BMTECHX.IN
             </a>
           </p>
         </div>

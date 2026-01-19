@@ -1,15 +1,28 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  FaSearchPlus,
-  FaTimes,
-  FaChevronLeft,
-  FaChevronRight,
-} from "react-icons/fa";
-// ✅ 1. Import Context and Data
+import { FaPlus, FaTimes, FaArrowLeft, FaArrowRight } from "react-icons/fa";
+
+// ✅ Import Context and Data
 import { useLanguage } from "../../../context/LanguageContext";
 import { galleryData } from "../../../data/gallery";
+
+// --- Custom Vector Background Pattern ---
+const GalleryVectorBackground = () => (
+  <div className="absolute inset-0 pointer-events-none opacity-[0.04]">
+    <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="gallery-pattern" width="60" height="60" patternUnits="userSpaceOnUse">
+          {/* Simple geometric shapes in brand colors */}
+          <circle cx="30" cy="30" r="2" fill="#0F224A" />
+          <path d="M0 0L60 60M60 0L0 60" stroke="#F59E0B" strokeWidth="0.5" />
+          <rect x="28" y="28" width="4" height="4" fill="#0F224A" transform="rotate(45 30 30)" />
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#gallery-pattern)" />
+    </svg>
+  </div>
+);
 
 const HomeGallery = () => {
   const [images, setImages] = useState([]);
@@ -17,9 +30,9 @@ const HomeGallery = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [error, setError] = useState("");
 
-  // ✅ 2. Get Language Data
   const { language } = useLanguage();
   const t = galleryData[language] || galleryData['en'];
+  const isTamil = language === 'ta';
 
   const API_URL = `${import.meta.env.VITE_API_BASE_URL}/gallery/images/`;
 
@@ -27,11 +40,10 @@ const HomeGallery = () => {
     const fetchImages = async () => {
       try {
         const res = await axios.get(API_URL);
-        // Ensure we handle the response correctly
         setImages(Array.isArray(res.data) ? res.data : []);
       } catch (err) {
         console.error(err);
-        setError(t.error); // ✅ Use translated error message
+        setError(t.error);
       }
     };
     fetchImages();
@@ -43,163 +55,149 @@ const HomeGallery = () => {
   };
   const closeLightbox = () => setLightboxOpen(false);
 
-  const prevImage = (e) => {
-    e.stopPropagation();
-    setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
-  };
-
-  const nextImage = (e) => {
-    e.stopPropagation();
-    setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
-  };
+  // Keyboard support
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (!lightboxOpen) return;
+      if (e.key === "Escape") closeLightbox();
+      if (e.key === "ArrowLeft") setCurrentIndex(prev => (prev === 0 ? images.length - 1 : prev - 1));
+      if (e.key === "ArrowRight") setCurrentIndex(prev => (prev === images.length - 1 ? 0 : prev + 1));
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [lightboxOpen, images.length]);
 
   return (
-    <section className="relative w-full bg-slate-50 py-20 md:py-28 overflow-hidden">
+    <section className="relative w-full bg-white py-20 lg:py-32 overflow-hidden">
 
-      {/* 🏁 Background Texture (Dot Grid) */}
-      <div className="absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:20px_20px] opacity-60 pointer-events-none"></div>
+      {/* ✅ ADDED: Vector Background Pattern */}
+      <GalleryVectorBackground />
 
-      <div className="relative container mx-auto px-6 md:px-12 lg:px-16 z-10">
+      <style>
+        {`
+          @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;500;600;700;800&display=swap');
+          .font-tamil { font-family: 'Noto Sans Tamil', sans-serif; }
+        `}
+      </style>
 
-        {/* --- Title Section --- */}
-        <motion.div
-          className="text-center mb-16 max-w-3xl mx-auto"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          <p className="text-[#0056b3] font-bold tracking-widest uppercase text-xs md:text-sm mb-3">
-             {t.sub}
-           </p>
-          <h2 className="text-3xl md:text-5xl font-black text-slate-900 mb-6">
-            {t.title} <span className="text-[#dc2626]">{t.highlightWord}</span>
-          </h2>
-          <div className="w-24 h-1.5 bg-gradient-to-r from-[#0056b3] to-[#dc2626] mx-auto rounded-full mb-6"></div>
+      <div className="container mx-auto px-4 md:px-8 lg:px-12 relative z-10">
 
-          <p className="text-lg text-gray-600 leading-relaxed font-medium">
-            {t.desc}{" "}
-            <span className="text-slate-900 font-bold block mt-2">
-              {t.quote}
+        {/* --- Minimalist Header --- */}
+        <div className="flex flex-col items-center text-center mb-16">
+            <span className={`text-amber-600 font-bold uppercase tracking-[0.2em] text-xs mb-3 ${isTamil ? 'font-tamil tracking-wide' : ''}`}>
+                {t.sub || "Archive"}
             </span>
-          </p>
-        </motion.div>
-
-        {error && (
-          <div className="text-center py-8 bg-red-50 rounded-xl border border-red-100 max-w-lg mx-auto mb-8">
-             <p className="text-[#dc2626] font-medium">{error}</p>
-          </div>
-        )}
-
-        {/* --- Gallery Grid --- */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
-          {images.map((img, index) => (
-            <motion.div
-              key={img._id}
-              className="group relative overflow-hidden rounded-2xl bg-white shadow-md cursor-pointer border-2 border-transparent hover:border-[#0056b3] hover:shadow-xl transition-all duration-300 h-64 md:h-72"
-              onClick={() => openLightbox(index)}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.05, duration: 0.4 }}
-              whileHover={{ y: -5 }}
-            >
-              <img
-                src={img.image_url}
-                alt={img.title}
-                className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110"
-              />
-
-              {/* Overlay on Hover */}
-              <div className="absolute inset-0 bg-slate-900/60 opacity-0 group-hover:opacity-100 flex flex-col items-center justify-center text-white transition-opacity duration-300 p-4 text-center">
-                <div className="w-12 h-12 bg-[#dc2626] rounded-full flex items-center justify-center mb-3 shadow-lg transform scale-0 group-hover:scale-100 transition-transform duration-300 delay-100">
-                   <FaSearchPlus className="text-xl" />
-                </div>
-                <h2 className="text-sm font-bold tracking-wide uppercase translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-100">
-                  {img.title}
-                </h2>
-              </div>
-            </motion.div>
-          ))}
+            <h2 className={`text-4xl md:text-6xl font-black text-[#0F224A] mb-6 ${isTamil ? 'font-tamil' : 'tracking-tighter'}`}>
+                {t.title}
+            </h2>
+            <div className="w-[1px] h-16 bg-gray-200"></div>
         </div>
 
-        {/* --- Lightbox Modal --- */}
-        <AnimatePresence>
-          {lightboxOpen && images.length > 0 && (
-            <motion.div
-              className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-slate-900/95 backdrop-blur-md p-4"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={closeLightbox}
-            >
-              {/* Close Button */}
-              <button
-                onClick={closeLightbox}
-                className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors p-2 bg-black/20 rounded-full"
-              >
-                <FaTimes className="text-2xl" />
-              </button>
+        {error && <div className="text-red-500 text-center mb-8">{error}</div>}
 
-              {/* Main Image Container */}
-              <div className="relative flex items-center justify-center w-full h-full max-h-[80vh] max-w-6xl" onClick={(e) => e.stopPropagation()}>
+        {/* --- MOSAIC GRID --- */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-1 md:gap-2 auto-rows-[250px]">
+          {images.map((img, index) => {
+            const isFeatured = index === 0;
 
-                {/* Prev Button */}
-                <button
-                  onClick={prevImage}
-                  className="absolute left-2 md:-left-12 top-1/2 -translate-y-1/2 text-white/70 hover:text-[#0056b3] transition p-3 bg-black/20 rounded-full hover:bg-white"
+            return (
+                <motion.div
+                  key={img._id}
+                  className={`relative group overflow-hidden cursor-pointer bg-gray-100 ${
+                      isFeatured ? 'sm:col-span-2 sm:row-span-2' : 'col-span-1 row-span-1'
+                  }`}
+                  onClick={() => openLightbox(index)}
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6 }}
                 >
-                  <FaChevronLeft className="text-2xl" />
-                </button>
-
-                {/* The Image */}
-                <div className="relative">
-                   <motion.img
-                    key={images[currentIndex]._id}
-                    src={images[currentIndex].image_url}
-                    alt={images[currentIndex].title}
-                    className="max-w-full max-h-[75vh] object-contain rounded-lg shadow-2xl border border-white/10"
-                    initial={{ scale: 0.95, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    transition={{ duration: 0.3 }}
+                  <img
+                    src={img.image_url}
+                    alt={img.title}
+                    // ✅ FIXED: Removed 'grayscale'. Now always full color.
+                    className="w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-105"
                   />
-                  {/* Title Caption */}
-                  <div className="absolute -bottom-12 left-0 w-full text-center">
-                    <p className="text-white font-bold text-xl tracking-wide">
-                      {images[currentIndex].title}
-                    </p>
+
+                  {/* Minimalist Overlay */}
+                  <div className="absolute inset-0 bg-[#0F224A]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+                  {/* Corner Icon */}
+                  <div className="absolute top-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-4 group-hover:translate-x-0">
+                      <FaPlus className="drop-shadow-md" />
                   </div>
-                </div>
 
-                {/* Next Button */}
-                <button
-                  onClick={nextImage}
-                  className="absolute right-2 md:-right-12 top-1/2 -translate-y-1/2 text-white/70 hover:text-[#0056b3] transition p-3 bg-black/20 rounded-full hover:bg-white"
-                >
-                  <FaChevronRight className="text-2xl" />
-                </button>
-              </div>
-
-              {/* Thumbnail Strip */}
-              <div className="absolute bottom-4 left-0 w-full flex justify-center px-4" onClick={(e) => e.stopPropagation()}>
-                <div className="flex space-x-3 overflow-x-auto py-2 px-4 max-w-full scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-transparent">
-                  {images.map((img, index) => (
-                    <img
-                      key={img._id}
-                      src={img.image_url}
-                      alt={img.title}
-                      className={`h-16 w-16 object-cover rounded-md cursor-pointer transition-all duration-300 border-2 ${
-                        currentIndex === index
-                          ? "border-[#0056b3] opacity-100 scale-110"
-                          : "border-transparent opacity-50 hover:opacity-100"
-                      }`}
-                      onClick={() => setCurrentIndex(index)}
-                    />
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+                  {/* Title Label (Bottom Left) */}
+                  <div className="absolute bottom-0 left-0 p-4 w-full bg-gradient-to-t from-black/80 to-transparent translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                      <h3 className={`text-white font-medium tracking-wide ${isTamil ? 'font-tamil text-sm' : 'text-xs uppercase'}`}>
+                          {img.title}
+                      </h3>
+                  </div>
+                </motion.div>
+            );
+          })}
+        </div>
       </div>
+
+      {/* --- Fullscreen Cinematic Lightbox --- */}
+      <AnimatePresence>
+        {lightboxOpen && images.length > 0 && (
+          <motion.div
+            className="fixed inset-0 z-[100] bg-white flex flex-col"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            {/* Lightbox Header */}
+            <div className="flex justify-between items-center p-6 border-b border-gray-100">
+                <div className={`text-[#0F224A] font-bold text-lg ${isTamil ? 'font-tamil' : ''}`}>
+                    {images[currentIndex].title}
+                </div>
+                <button onClick={closeLightbox} className="p-2 hover:bg-gray-100 rounded-full transition-colors">
+                    <FaTimes size={24} className="text-gray-400 hover:text-red-500" />
+                </button>
+            </div>
+
+            {/* Lightbox Main Content */}
+            <div className="flex-1 relative flex items-center justify-center bg-gray-50 p-4 md:p-12 overflow-hidden" onClick={closeLightbox}>
+                <motion.img
+                   key={currentIndex}
+                   src={images[currentIndex].image_url}
+                   alt={images[currentIndex].title}
+                   className="w-auto h-auto max-w-full max-h-full shadow-2xl object-contain"
+                   initial={{ opacity: 0, scale: 0.98 }}
+                   animate={{ opacity: 1, scale: 1 }}
+                   transition={{ duration: 0.4, ease: "easeOut" }}
+                   onClick={(e) => e.stopPropagation()}
+                />
+
+                {/* Navigation Arrows */}
+                <button
+                   onClick={(e) => { e.stopPropagation(); setCurrentIndex(prev => (prev === 0 ? images.length - 1 : prev - 1)); }}
+                   className="absolute left-4 md:left-8 p-4 text-gray-400 hover:text-[#0F224A] transition-colors"
+                >
+                   <FaArrowLeft size={32} />
+                </button>
+                <button
+                   onClick={(e) => { e.stopPropagation(); setCurrentIndex(prev => (prev === images.length - 1 ? 0 : prev + 1)); }}
+                   className="absolute right-4 md:right-8 p-4 text-gray-400 hover:text-[#0F224A] transition-colors"
+                >
+                   <FaArrowRight size={32} />
+                </button>
+            </div>
+
+            {/* Lightbox Footer (Progress Bar) */}
+            <div className="h-1 bg-gray-100 w-full">
+                <div
+                    className="h-full bg-amber-500 transition-all duration-300"
+                    style={{ width: `${((currentIndex + 1) / images.length) * 100}%` }}
+                ></div>
+            </div>
+
+          </motion.div>
+        )}
+      </AnimatePresence>
+
     </section>
   );
 };
