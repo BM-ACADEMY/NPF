@@ -110,9 +110,9 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 // Removed MessageSquareWarning since we deleted the complaint button
 
 // ✅ IMPORT YOUR BANNER IMAGES
-import BannerImg1 from "../../../assets/banner/Banner.jpeg";
+import BannerImg1 from "../../../assets/banner/Banner1.jpeg";
 // Add more if you have them, or use the same one for testing
-import BannerImg2 from "../../../assets/banner/Banner.jpeg";
+import BannerImg2 from "../../../assets/banner/Banner2.jpeg";
 
 const Banner = () => {
   const [currentSlide, setCurrentSlide] = useState(0);

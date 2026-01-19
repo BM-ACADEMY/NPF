@@ -2,7 +2,6 @@ import os
 from pathlib import Path
 from pymongo import MongoClient
 from dotenv import load_dotenv
-from decouple import config
 
 # -----------------------------
 # Base Directory
@@ -27,13 +26,9 @@ DEBUG = os.getenv("DEBUG", "False").lower() in ["true", "1", "yes"]
 RENDER_EXTERNAL_HOSTNAME = os.getenv("RENDER_EXTERNAL_HOSTNAME")
 
 ALLOWED_HOSTS = [
-    "npf.com",
-    "www.npf.com",
-    "api.npf.com",
-    "npf1.onrender.com",
-    "npf1-frontend.onrender.com",
-    "127.0.0.1",
     "localhost",
+    "127.0.0.1",
+    "npf1.onrender.com",   # backend render URL
 ]
 
 if RENDER_EXTERNAL_HOSTNAME:
@@ -68,9 +63,10 @@ INSTALLED_APPS = [
 # Middleware
 # -----------------------------
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -78,6 +74,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
 
 # -----------------------------
 # URL Configuration
@@ -174,28 +171,20 @@ USE_TZ = True
 # -----------------------------
 
 STATIC_URL = '/static/'
-STATIC_ROOT = '/var/www/npf-app/server/staticfiles'
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 STATICFILES_DIRS = [
     BASE_DIR / "npf_backend" / "static",
 ]
 
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+
 # MEDIA
-MEDIA_URL = os.getenv("MEDIA_URL", "/media/")
-
-if DEBUG:
-    MEDIA_ROOT = BASE_DIR / "media"
-else:
-    MEDIA_ROOT = "/var/www/npf_media"
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
 
 
-# Always use API domain for media URLs
-
-# Where to store uploaded files
-if DEBUG:
-    MEDIA_ROOT = BASE_DIR / "media"
-else:
-    MEDIA_ROOT = "/var/www/npf_media"
 
 
 # -------------------se----------
@@ -206,17 +195,17 @@ else:
 #     "https://www.npf.com",
 # ]
 CORS_ALLOWED_ORIGINS = [
-    "https://npf.com",
-    "https://www.npf.com",
     "http://localhost:5173",
     "http://127.0.0.1:5173",
+    "https://npf.vercel.app",   # frontend
 ]
+
 
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://npf.com",
-    "https://www.npf.com",
+    "https://npf.vercel.app",
 ]
+
 
 
 

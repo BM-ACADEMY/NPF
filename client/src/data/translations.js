@@ -48,7 +48,7 @@ export const translations = {
     ],
     // Buttons
     buttons: {
-      join: "TO JOIN npf",
+      join: "JOIN NPF",
       about: "About Us",
     }
   },
