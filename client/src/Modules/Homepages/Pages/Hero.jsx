@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { ChevronRight, ArrowRight } from "lucide-react";
 
 // ✅ 1. Import your Image
-import HeroImage1 from "../../../assets/PutsfHero.jpg";
+import HeroImage1 from "../../../assets/npf_Hero.jpeg";
 
 // ✅ 2. Import the Language Context & New Data File
 import { useLanguage } from "../../../context/LanguageContext";
@@ -63,11 +63,10 @@ const Hero = () => {
       </style>
 
       {/* --- Responsive Background Decorations --- */}
-      {/* Hidden on very small screens to save performance */}
       <div className="hidden sm:block absolute top-0 right-0 w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-blue-50 rounded-full blur-3xl opacity-60 translate-x-1/3 -translate-y-1/3 pointer-events-none"></div>
       <div className="hidden sm:block absolute bottom-0 left-0 w-[200px] md:w-[400px] h-[200px] md:h-[400px] bg-amber-50 rounded-full blur-3xl opacity-60 -translate-x-1/3 translate-y-1/3 pointer-events-none"></div>
 
-      {/* Main Container: Adjust padding for Mobile (py-12) vs Desktop (py-24) */}
+      {/* Main Container */}
       <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-16 py-12 md:py-20 lg:py-28 relative z-10">
 
         <div className="flex flex-col-reverse lg:flex-row items-center gap-10 md:gap-16 lg:gap-20 xl:gap-24">
@@ -79,7 +78,6 @@ const Hero = () => {
             <div className="inline-flex items-center gap-2 py-1.5 px-3 md:py-2 md:px-4 rounded-full bg-slate-100 border border-slate-200 mb-6 md:mb-8 animate-fadeIn">
               <span className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-[#0F224A]"></span>
               <span className={`text-slate-600 text-[10px] md:text-xs font-semibold tracking-wide ${isTamil ? 'font-tamil' : 'uppercase'}`}>
-                {/* Static text or translated if available */}
                 Political Party
               </span>
             </div>
@@ -88,11 +86,9 @@ const Hero = () => {
             <h1
               key={`title-${currentSlide}-${language}`}
               className={`font-bold text-[#0F224A] mb-4 md:mb-6 animate-slideUp ${
-                 isTamil
-                 // Tamil: Slightly smaller max size, increased line height
-                 ? "font-tamil text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-snug tracking-normal"
-                 // English: Big, Bold, Tight
-                 : "text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-[1.1] tracking-tight"
+                  isTamil
+                  ? "font-tamil text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-snug tracking-normal"
+                  : "text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-[1.1] tracking-tight"
               }`}
             >
               {renderTitle(currentSlides[currentSlide].title, currentSlides[currentSlide].highlight)}
@@ -102,9 +98,9 @@ const Hero = () => {
             <p
               key={`desc-${currentSlide}-${language}`}
               className={`text-slate-600 mb-8 md:mb-10 max-w-xl mx-auto lg:mx-0 animate-slideUp delay-100 ${
-                 isTamil
-                 ? "font-tamil text-base md:text-lg leading-relaxed"
-                 : "text-base sm:text-lg md:text-xl leading-relaxed"
+                  isTamil
+                  ? "font-tamil text-base md:text-lg leading-relaxed"
+                  : "text-base sm:text-lg md:text-xl leading-relaxed"
               }`}
             >
               {currentSlides[currentSlide].desc}
@@ -112,8 +108,6 @@ const Hero = () => {
 
             {/* Buttons */}
             <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center lg:justify-start animate-slideUp delay-200 w-full sm:w-auto">
-
-              {/* Primary Button */}
               <Link
                 to="/license"
                 className={`group bg-[#0F224A] hover:bg-blue-900 text-white rounded-full shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2 w-full sm:w-auto ${
@@ -126,7 +120,6 @@ const Hero = () => {
                 <ChevronRight size={20} className="group-hover:translate-x-1 transition-transform" />
               </Link>
 
-              {/* Secondary Button */}
               <Link
                 to="/about"
                 className={`group text-slate-600 hover:text-[#0F224A] hover:bg-slate-50 rounded-full border border-transparent hover:border-slate-200 transition-all flex items-center justify-center gap-2 w-full sm:w-auto ${
@@ -143,24 +136,22 @@ const Hero = () => {
 
           {/* === RIGHT: IMAGE SLIDER === */}
           <div className="w-full lg:w-1/2 flex justify-center lg:justify-end relative px-4 sm:px-0">
-             <div className="relative w-full max-w-[350px] md:max-w-md lg:max-w-lg group">
+              {/* ✅ FIXED: Professional Image Container */}
+              <div className="relative w-full max-w-[350px] md:max-w-md lg:max-w-lg group">
 
-                {/* Decorative offset border (Hidden on Mobile to save space/cleaner look) */}
-                <div className="hidden sm:block absolute inset-0 bg-amber-100 rounded-[2rem] transform translate-x-3 translate-y-3 md:translate-x-4 md:translate-y-4 -z-10 transition-transform group-hover:translate-x-5 group-hover:translate-y-5"></div>
+                {/* 1. Soft, Layered Shadow Effect (Replaces the solid border block) */}
+                <div className="hidden sm:block absolute inset-0 bg-amber-100/50 rounded-[2rem] transform translate-x-4 translate-y-4 md:translate-x-6 md:translate-y-6 blur-md -z-20 transition-all group-hover:translate-x-5 group-hover:translate-y-5 group-hover:blur-lg"></div>
+                <div className="hidden sm:block absolute inset-0 bg-blue-100/30 rounded-[2rem] transform translate-x-2 translate-y-2 md:translate-x-3 md:translate-y-3 blur-sm -z-10 transition-all group-hover:translate-x-3 group-hover:translate-y-3"></div>
 
-                {/* Image Container */}
-                <div className="rounded-3xl md:rounded-[2rem] overflow-hidden shadow-xl md:shadow-2xl shadow-slate-200/50 bg-white">
+                {/* 2. Clean Image Container with Border */}
+                <div className="rounded-3xl md:rounded-[2.5rem] overflow-hidden shadow-2xl bg-white border-4 border-white relative z-10">
                   <img
                     src={HeroImage1}
-                    alt="Student Body Hero"
-                    // Fluid Height: Mobile (300px) -> Tablet (450px) -> Desktop (550px)
-                    className="w-full h-[300px] sm:h-[400px] md:h-[450px] lg:h-[550px] object-cover transform transition-transform duration-1000 hover:scale-105"
+                    alt="Hero"
+                    className="w-full h-[300px] sm:h-[400px] md:h-[450px] lg:h-[550px] object-cover transform transition-transform duration-700 group-hover:scale-105"
                   />
                 </div>
-
-                
-
-             </div>
+              </div>
           </div>
 
         </div>
@@ -176,13 +167,8 @@ const Hero = () => {
           from { opacity: 0; }
           to { opacity: 1; }
         }
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
         .animate-slideUp { animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         .animate-fadeIn { animation: fadeIn 1s ease-out forwards; }
-        .animate-float { animation: float 4s ease-in-out infinite; }
         .delay-100 { animation-delay: 0.1s; }
         .delay-200 { animation-delay: 0.2s; }
       `}</style>
