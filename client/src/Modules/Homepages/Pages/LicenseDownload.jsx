@@ -129,8 +129,15 @@ export default function MembershipDownload() {
             {/* Header Section */}
             <div className="pt-10 pb-6 px-8 text-center bg-gradient-to-b from-slate-50 to-white border-b border-slate-100">
                 <div className="inline-block relative mb-4">
-                   <img src={logo} alt="Logo" className="w-20 h-20 object-contain drop-shadow-sm" />
-                   <div className="absolute -bottom-2 -right-2 bg-[#0F224A] text-white p-1.5 rounded-full border-2 border-white shadow-sm">
+                   {/* ✅ UPDATED: Force Round Logo */}
+                   <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-white shadow-md flex items-center justify-center bg-white">
+                       <img
+                           src={logo}
+                           alt="Logo"
+                           className="w-full h-full object-cover"
+                       />
+                   </div>
+                   <div className="absolute -bottom-1 -right-1 bg-[#0F224A] text-white p-1.5 rounded-full border-2 border-white shadow-sm z-10">
                        <FaShieldAlt size={12} />
                    </div>
                 </div>

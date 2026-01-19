@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Logo from "../../../assets/npf-logo.jpeg";
-import { FaFacebookF, FaTwitter, FaInstagram, FaYoutube, FaArrowRight, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
+import { FaFacebookF, FaTwitter, FaInstagram, FaYoutube } from "react-icons/fa";
 
 // ✅ 1. Import Context and Data
 import { useLanguage } from "../../../context/LanguageContext";
@@ -62,9 +62,15 @@ const Footer = () => {
           {/* === 1. Brand Section === */}
           <div className="lg:col-span-2 space-y-6">
             <Link to="/" className="flex items-center gap-4 group">
-              <div className="bg-white p-1 rounded-full shrink-0">
-                <img src={Logo} alt="Logo" className="w-12 h-12 object-contain" />
+              {/* ✅ UPDATED: Round Logo Fix */}
+              <div className="w-14 h-14 bg-white p-0.5 rounded-full overflow-hidden flex items-center justify-center shrink-0">
+                <img
+                    src={Logo}
+                    alt="Logo"
+                    className="w-full h-full object-cover rounded-full"
+                />
               </div>
+
               <div>
                 <h2 className={`font-bold text-white text-xl leading-none group-hover:text-slate-200 transition-colors ${isTamil ? 'font-tamil' : 'uppercase tracking-tight'}`}>
                   {navTranslations.nav.menuTitle}
@@ -79,7 +85,7 @@ const Footer = () => {
               {f.description}
             </p>
 
-            {/* Clean Social Icons (No colors, just white/slate) */}
+            {/* Clean Social Icons */}
             <div className="flex gap-3">
               {socialLinks.map((item, i) => (
                 <a
@@ -142,12 +148,14 @@ const Footer = () => {
 
         {/* === Footer Bottom === */}
         <div className="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
+
+          {/* ✅ UPDATED: Copyright Text */}
           <p className={`text-slate-500 text-xs ${isTamil ? 'font-tamil' : ''}`}>
-            © {new Date().getFullYear()} NPF. {f.allRights}
+            © {new Date().getFullYear()} <span className="text-slate-300 font-semibold">bmtechx.in</span>. All Rights Reserved.
           </p>
 
           <p className={`text-slate-500 text-xs ${isTamil ? 'font-tamil' : ''}`}>
-            {f.developedBy}{" "}
+            Developed by{" "}
             <a
               href="https://bmtechx.in/"
               target="_blank"
