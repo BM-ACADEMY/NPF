@@ -198,12 +198,14 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
     "https://npf.vercel.app",   # frontend
+    "https://npf-test.vercel.app",
+
 ]
 
 
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://npf.vercel.app",
+    "https://npf-test.vercel.app",
 ]
 
 
