@@ -1,13 +1,29 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { toast } from "react-toastify";
-import { FaDownload, FaShieldAlt } from "react-icons/fa";
-import { motion } from "framer-motion";
+import { toast, ToastContainer, Slide } from "react-toastify";
+import { FaDownload, FaIdCard, FaCheckCircle, FaExclamationCircle, FaShieldAlt } from "react-icons/fa";
+import { motion, AnimatePresence } from "framer-motion";
 import logo from "../../../assets/npf-logo.jpeg";
+import "react-toastify/dist/ReactToastify.css";
 
 // ✅ 1. Import Context and Data
 import { useLanguage } from "../../../context/LanguageContext";
 import { downloadData } from "../../../data/licensedownload";
+
+// Subtle Document Pattern Background
+const OfficialBackground = () => (
+  <div className="absolute inset-0 pointer-events-none opacity-[0.03]">
+    <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="doc-grid" width="60" height="60" patternUnits="userSpaceOnUse">
+           <path d="M0 0h60v60H0z" fill="none"/>
+           <path d="M0 60L60 0" stroke="#0F224A" strokeWidth="0.5"/>
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#doc-grid)" />
+    </svg>
+  </div>
+);
 
 export default function MembershipDownload() {
   const [phone, setPhone] = useState("");
@@ -16,9 +32,9 @@ export default function MembershipDownload() {
   const [errorMsg, setErrorMsg] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
 
-  // ✅ 2. Get Language Data
   const { language } = useLanguage();
   const t = downloadData[language] || downloadData['en'];
+  const isTamil = language === 'ta';
 
   const API_URL = `${import.meta.env.VITE_API_BASE_URL}/npf/download/`;
 
@@ -83,117 +99,152 @@ export default function MembershipDownload() {
   };
 
   return (
-    <section className="min-h-screen flex items-center justify-center bg-slate-50 relative overflow-hidden py-10">
+    <section className="min-h-screen flex items-center justify-center bg-slate-100 relative overflow-hidden py-10">
+      <ToastContainer position="top-center" transition={Slide} />
 
-      <div className="absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:20px_20px] opacity-60 pointer-events-none"></div>
+      {/* Tamil Font Import */}
+      <style>
+        {`
+          @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;500;600;700;800&display=swap');
+          .font-tamil { font-family: 'Noto Sans Tamil', sans-serif; }
+        `}
+      </style>
 
-      {/* 🎨 Subtle Glows */}
-      <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-blue-50/50 rounded-full blur-[80px] pointer-events-none"></div>
-      <div className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] bg-red-50/50 rounded-full blur-[80px] pointer-events-none"></div>
+      {/* Official Pattern Background */}
+      <OfficialBackground />
+
+      {/* Decorative Blur Circles (Cool Blue/Grey) */}
+      <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-slate-300/30 rounded-full blur-[100px] pointer-events-none"></div>
+      <div className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] bg-blue-100/30 rounded-full blur-[100px] pointer-events-none"></div>
 
       <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
+        initial={{ opacity: 0, scale: 0.98 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5 }}
-        className="relative z-10 max-w-md w-full bg-white shadow-2xl rounded-2xl overflow-hidden border-t-8 border-[#0056b3]"
+        transition={{ duration: 0.4 }}
+        className="relative z-10 max-w-lg w-full mx-4"
       >
-        <div className="p-8 text-center">
+        {/* --- Card Container --- */}
+        <div className="bg-white rounded-xl shadow-2xl overflow-hidden border border-slate-200">
 
-          {/* Logo Section */}
-          <div className="flex justify-center mb-6 relative">
-            <div className="relative">
-              <img src={logo} alt="npf Logo" className="w-28 h-28 object-contain drop-shadow-md rounded-full bg-white p-1" />
-              <div className="absolute -bottom-2 -right-2 bg-[#0056b3] text-white p-2 rounded-full shadow-lg border-2 border-white">
-                <FaShieldAlt className="text-sm" />
-              </div>
+            {/* Header Section */}
+            <div className="pt-10 pb-6 px-8 text-center bg-gradient-to-b from-slate-50 to-white border-b border-slate-100">
+                <div className="inline-block relative mb-4">
+                   <img src={logo} alt="Logo" className="w-20 h-20 object-contain drop-shadow-sm" />
+                   <div className="absolute -bottom-2 -right-2 bg-[#0F224A] text-white p-1.5 rounded-full border-2 border-white shadow-sm">
+                       <FaShieldAlt size={12} />
+                   </div>
+                </div>
+
+                <h1 className={`text-2xl font-bold text-[#0F224A] mb-1 ${isTamil ? 'font-tamil' : 'uppercase tracking-tight'}`}>
+                    {t.title}
+                </h1>
+                <p className={`text-slate-500 text-xs font-semibold uppercase tracking-widest ${isTamil ? 'font-tamil' : ''}`}>
+                    {t.subtitle || "Secure ID Verification"}
+                </p>
             </div>
-          </div>
 
-          {/* Header Text */}
-          <h1 className="text-2xl font-black text-slate-900 mb-2">
-            {t.title} <span className="text-[#0056b3]">{t.highlight}</span>
-          </h1>
-          <p className="text-gray-500 text-sm mb-8 leading-relaxed">
-            {t.subtitle}
-          </p>
+            {/* Body Section */}
+            <div className="p-8 md:p-10">
 
-          {/* Input Field */}
-          <div className="relative mb-2">
-            <input
-              type="text"
-              placeholder={t.placeholder}
-              value={phone}
-              onChange={(e) => {
-                const onlyNums = e.target.value.replace(/\D/g, "");
-                if (onlyNums.length <= 10) setPhone(onlyNums);
-                if (onlyNums.length > 0 && onlyNums.length < 10) {
-                  setErrorMsg(t.errors.digitLimit);
-                  setSuccessMsg("");
-                } else setErrorMsg("");
-              }}
-              maxLength={10}
-              className={`w-full bg-slate-50 border-2 ${errorMsg ? "border-[#dc2626] bg-red-50" : "border-slate-200 focus:border-[#0056b3] focus:bg-white"} outline-none px-4 py-4 rounded-xl text-center text-lg font-bold tracking-widest transition-all duration-300 placeholder-gray-400`}
-            />
-            {phone.length === 10 && !errorMsg && (
-              <div className="absolute right-4 top-1/2 -translate-y-1/2 text-green-500">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
-              </div>
-            )}
-          </div>
+                <div className="text-center mb-8">
+                    <label className={`block text-slate-400 text-xs font-bold uppercase tracking-wider mb-2 ${isTamil ? 'font-tamil' : ''}`}>
+                        {t.placeholder || "Registered Mobile Number"}
+                    </label>
 
-          <div className="h-6 mb-4">
-             {errorMsg && <p className="text-[#dc2626] text-xs font-bold animate-pulse">{errorMsg}</p>}
-          </div>
+                    {/* Input Group */}
+                    <div className="relative group">
+                        <input
+                            type="text"
+                            placeholder="XXXXXXXXXX"
+                            value={phone}
+                            onChange={(e) => {
+                                const onlyNums = e.target.value.replace(/\D/g, "");
+                                if (onlyNums.length <= 10) setPhone(onlyNums);
+                                setErrorMsg(""); // Clear error on type
+                            }}
+                            maxLength={10}
+                            className={`w-full bg-slate-50 border-2 ${
+                                errorMsg ? "border-red-400 bg-red-50" : "border-slate-200 focus:border-[#0F224A] focus:bg-white"
+                            } outline-none px-6 py-4 rounded-lg text-center text-2xl font-bold tracking-[0.2em] text-[#0F224A] transition-all duration-300 placeholder-slate-300`}
+                        />
+                        {/* Success Icon */}
+                        {phone.length === 10 && !errorMsg && (
+                            <div className="absolute right-4 top-1/2 -translate-y-1/2 text-emerald-500 animate-pulse">
+                                <FaCheckCircle size={22} />
+                            </div>
+                        )}
+                    </div>
 
-          {loading && (
-            <div className="w-full bg-slate-100 rounded-full h-2 mb-6 relative overflow-hidden">
-              <div className="h-full bg-gradient-to-r from-[#0056b3] to-[#dc2626] rounded-full transition-all duration-200" style={{ width: `${progress}%` }}></div>
+                    {/* Error Feedback */}
+                    <AnimatePresence>
+                        {errorMsg && (
+                            <motion.div
+                                initial={{ opacity: 0, height: 0 }}
+                                animate={{ opacity: 1, height: 'auto' }}
+                                exit={{ opacity: 0, height: 0 }}
+                                className="mt-3 flex items-center justify-center gap-2 text-red-600 text-xs font-bold"
+                            >
+                                <FaExclamationCircle /> {errorMsg}
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+                </div>
+
+                {/* Loading Bar */}
+                {loading && (
+                    <div className="w-full bg-slate-100 rounded-full h-1.5 mb-6 overflow-hidden">
+                        <div className="h-full bg-[#0F224A] rounded-full transition-all duration-200" style={{ width: `${progress}%` }}></div>
+                    </div>
+                )}
+
+                {/* Action Button */}
+                <button
+                    onClick={handleDownload}
+                    disabled={loading}
+                    className={`w-full py-4 rounded-lg font-bold text-sm md:text-base shadow-lg transition-all duration-300 flex items-center justify-center gap-2
+                        ${loading
+                            ? "bg-slate-300 text-slate-500 cursor-not-allowed"
+                            : "bg-[#0F224A] hover:bg-[#1a3a7a] text-white hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0"
+                        } ${isTamil ? 'font-tamil' : 'uppercase tracking-widest'}`}
+                >
+                    {loading ? (
+                        <>
+                           <svg className="animate-spin h-4 w-4 text-slate-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                           </svg>
+                           {t.processing || "Verifying..."}
+                        </>
+                    ) : (
+                        <>
+                           <FaDownload />
+                           {t.button || "Download Certificate"}
+                        </>
+                    )}
+                </button>
+
+                {/* Success Message */}
+                {successMsg && (
+                    <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="mt-6 p-4 bg-emerald-50 border border-emerald-100 rounded-lg text-center"
+                    >
+                        <p className="text-emerald-700 font-bold text-sm flex items-center justify-center gap-2">
+                            <FaCheckCircle /> {successMsg}
+                        </p>
+                    </motion.div>
+                )}
+
             </div>
-          )}
 
-          {/* Download Button */}
-          <button
-            onClick={handleDownload}
-            disabled={loading}
-            className={`w-full flex items-center justify-center gap-2 py-4 rounded-xl text-white font-bold text-lg shadow-lg transition-all duration-300 transform
-              ${loading ? "bg-slate-400 cursor-not-allowed" : "bg-[#dc2626] hover:bg-[#b91c1c] hover:-translate-y-1 hover:shadow-red-200"}`}
-          >
-            {loading ? (
-              <span className="flex items-center gap-2">
-                <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                </svg>
-                {t.processing}
-              </span>
-            ) : (
-              <>
-                <FaDownload />
-                {t.button}
-              </>
-            )}
-          </button>
+            {/* Footer Strip */}
+            <div className="bg-slate-50 p-4 text-center border-t border-slate-100">
+                 <p className={`text-[10px] text-slate-400 font-bold uppercase tracking-widest ${isTamil ? 'font-tamil' : ''}`}>
+                    {t.footer || "Official NPF Portal"}
+                 </p>
+            </div>
 
-          {successMsg && (
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="mt-6 p-3 bg-green-50 border border-green-200 rounded-lg"
-            >
-              <p className="text-green-700 font-bold text-sm flex items-center justify-center gap-2">
-                ✅ {successMsg}
-              </p>
-            </motion.div>
-          )}
-
-        </div>
-
-        <div className="bg-slate-50 border-t border-slate-100 p-4 text-center">
-          <p className="text-xs text-gray-400 font-semibold uppercase tracking-wider">
-            {t.footer}
-          </p>
         </div>
       </motion.div>
     </section>

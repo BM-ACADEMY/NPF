@@ -29,6 +29,7 @@ ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
     "npf1.onrender.com",   # backend render URL
+    "npf-backend-yjip.onrender.com",
 ]
 
 if RENDER_EXTERNAL_HOSTNAME:
