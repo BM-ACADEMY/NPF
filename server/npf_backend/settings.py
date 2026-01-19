@@ -196,14 +196,13 @@ MEDIA_ROOT = BASE_DIR / "media"
 #     "https://npf.com",
 #     "https://www.npf.com",
 # ]
-# CORS_ALLOWED_ORIGINS = [
-#     "http://localhost:5173",
-#     "http://127.0.0.1:5173",
-#     "https://npf.vercel.app",   # frontend
-#     "https://npf-test.vercel.app",
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+    "https://npf.vercel.app",   # frontend
+    "https://npf-test.vercel.app",
 
-# ]
-CORS_ALLOW_ALL_ORIGINS = True
+]
 
 
 
