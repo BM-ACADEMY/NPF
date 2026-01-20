@@ -43,7 +43,8 @@ import Contact from "../Modules/Homepages/Pages/Contact";
 import Complaint from "../Modules/Homepages/Pages/Complaint";
 import LicenseCardPdfWrapper from "../Modules/Homepages/Pages/LicenseCardPdfWrapper";
 import About from "../Modules/Homepages/Pages/About";
-import GetInvolved from "../Modules/Homepages/Pages/Getinvolved";
+import GetInvolved from "../Modules/Homepages/Pages/Ourteam";
+import OurTeam from "../Modules/Homepages/Pages/Ourteam";
 
 
 const AppRoutes = () => {
@@ -119,10 +120,10 @@ const AppRoutes = () => {
             }
           />
           <Route
-  path="/get-involved"
+  path="/our-team"
   element={
     <Layout>
-      <GetInvolved />
+      <OurTeam />
     </Layout>
   }
   />

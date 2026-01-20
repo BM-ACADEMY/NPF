@@ -7,47 +7,68 @@ import { statsData } from "../../../data/stats";
 
 const StatsSection = () => {
   const { language } = useLanguage();
-  const data = statsData[language] || statsData["en"];
+  const rawData = statsData[language] || statsData["en"];
 
-  // This hook detects when the section is visible on screen
+  // Reordering data to ensure "Students" is in the 2nd position
+  const data = [
+    rawData.find(d => d.id === 1), // Party Members
+    rawData.find(d => d.id === 4), // Students (Moved to 2nd)
+    rawData.find(d => d.id === 2), // Years of Service
+    rawData.find(d => d.id === 3), // Successful Campaigns
+  ];
+
   const { ref, inView } = useInView({
-    triggerOnce: true, // Animation only happens once
-    threshold: 0.3,    // Starts when 30% of the section is visible
+    triggerOnce: true,
+    threshold: 0.3,
   });
 
   return (
-    <section ref={ref} className="py-20 bg-white relative overflow-hidden">
-      {/* Subtle Background Decoration */}
-      <div className="absolute top-0 right-0 w-64 h-64 bg-red-50 rounded-full blur-3xl opacity-50 -mr-32 -mt-32"></div>
-      <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-50 rounded-full blur-3xl opacity-50 -ml-32 -mb-32"></div>
+    <section
+      ref={ref}
+      className="relative py-24 bg-white overflow-hidden border-y border-slate-100"
+    >
+      {/* --- SIMPLE SQUARE GRID VECTOR --- */}
+      <div
+        className="absolute inset-0 opacity-[0.4] pointer-events-none"
+        style={{
+          backgroundImage: `
+            linear-gradient(to right, #f1f5f9 1px, transparent 1px),
+            linear-gradient(to bottom, #f1f5f9 1px, transparent 1px)
+          `,
+          backgroundSize: '40px 40px'
+        }}
+      ></div>
 
       <div className="container mx-auto px-6 relative z-10">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {data.map((stat, index) => (
             <motion.div
               key={stat.id}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="flex flex-col items-center text-center p-6 rounded-2xl hover:bg-slate-50 transition-colors duration-300"
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              /* Clean Navy to Gold hover effect matching logo tones */
+              className="group relative flex flex-col items-center justify-center p-10
+                         bg-white border border-slate-100 rounded-xl transition-all duration-300
+                         hover:bg-[#1a2b4b] hover:shadow-xl hover:-translate-y-1 cursor-default"
             >
-              <div className="text-4xl md:text-5xl lg:text-6xl font-black text-[#dc2626] mb-2 flex items-baseline">
+              {/* Stat Value */}
+              <div className="text-4xl md:text-5xl font-black text-[#1a2b4b] group-hover:text-[#FACC15] transition-colors duration-300 flex items-baseline gap-1">
                 {inView ? (
-                  <CountUp
-                    start={0}
-                    end={stat.value}
-                    duration={2.5}
-                    separator=","
-                  />
+                  <CountUp start={0} end={stat.value} duration={2} separator="," />
                 ) : (
                   "0"
                 )}
-                <span className="ml-1">{stat.suffix}</span>
+                <span className="text-lg font-bold text-[#FACC15] group-hover:text-white transition-colors duration-300">
+                  {stat.suffix}
+                </span>
               </div>
 
-              <div className="h-1 w-12 bg-[#0056b3] rounded-full mb-4"></div>
+              {/* Minimal Divider matching logo Gold */}
+              <div className="w-10 h-1 bg-[#FACC15] group-hover:bg-white my-5 rounded-full transition-all duration-300 group-hover:w-16"></div>
 
-              <p className="text-[#0F224A] font-bold text-sm md:text-lg uppercase tracking-wide">
+              {/* Label matching Navy Blue text in logo */}
+              <p className="text-[#1a2b4b]/70 font-bold text-xs uppercase tracking-[0.2em] group-hover:text-white text-center leading-relaxed transition-colors duration-300">
                 {stat.label}
               </p>
             </motion.div>

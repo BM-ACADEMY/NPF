@@ -35,7 +35,7 @@ const Header = () => {
     }
   };
 
-  const navItems = ['Home', 'About', 'Get Involved', 'Gallery', 'Blog', 'Contact'];
+  const navItems = ['Home', 'About', 'Our Team', 'Gallery', 'Blog', 'Contact'];
 
   return (
     <>
@@ -93,7 +93,7 @@ const Header = () => {
               {/* Nav Links: Adaptive spacing (gap-4 on laptop, gap-8 on desktop) */}
               <div className="flex items-center gap-4 xl:gap-8 px-4 xl:px-8">
                   {navItems.map((item) => {
-                     const transKey = item === 'Get Involved' ? 'getInvolved' : item.toLowerCase();
+                     const transKey = item === 'Our Team' ? 'Ourteam' : item.toLowerCase();
                      const label = t.nav[transKey];
                      const isActive = location.pathname === (item === 'Home' ? '/' : `/${item.toLowerCase()}`);
 
@@ -102,7 +102,7 @@ const Header = () => {
                         ? `font-tamil lg:text-[13px] xl:text-[15px] font-bold tracking-normal transition-colors duration-300 ${isActive ? 'text-[#0F224A]' : 'text-gray-600 hover:text-[#D4AF37]'}`
                         : `lg:text-[10px] xl:text-xs font-bold uppercase tracking-widest transition-colors duration-300 ${isActive ? 'text-[#0F224A]' : 'text-gray-500 hover:text-[#D4AF37]'}`;
 
-                     if (item === 'About' || item === 'Get Involved') {
+                     if (item === 'About' || item === 'Our Team') {
                         return (
                           <div key={item} className="relative group py-4 flex items-center">
                              <button className={`${linkStyle} flex items-center gap-1`}>
@@ -111,17 +111,17 @@ const Header = () => {
 
                              {/* Dropdown - Adjusted z-index and padding */}
                              <div className="absolute top-full left-1/2 -translate-x-1/2 w-48 xl:w-52 bg-white shadow-xl border-t-[3px] border-[#D4AF37] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0 rounded-b-lg p-1.5 z-50">
-                                {(item === 'About' ? ['background', 'vision', 'team'] : ['join', 'volunteer', 'donate']).map((sub) => (
+                                {(item === 'About' ? ['background', 'vision', 'philosophy'] : ['executivecommittee', 'general', 'action']).map((sub) => (
                                    <button
                                       key={sub}
-                                      onClick={() => handleNavClick(item === 'About' ? `/about#${sub}` : `/get-involved#${sub}`)}
+                                      onClick={() => handleNavClick(item === 'About' ? `/about#${sub}` : `/our-team#${sub}`)}
                                       className={`block w-full text-left px-4 py-2.5 rounded hover:bg-gray-50 text-gray-600 hover:text-[#0F224A] ${
                                         isTamil
                                           ? "font-tamil text-sm font-semibold"
                                           : "text-xs font-bold uppercase tracking-wide"
                                       }`}
                                    >
-                                      {item === 'About' ? t.nav.aboutMenu[sub] : t.nav.getInvolvedMenu[sub]}
+                                      {item === 'About' ? t.nav.aboutMenu[sub] : t.nav.OurteamMenu[sub]}
                                    </button>
                                 ))}
                              </div>
@@ -199,7 +199,7 @@ const Header = () => {
                 {/* Mobile Links */}
                 <div className="flex flex-col p-6 gap-5">
                    {navItems.map((item) => {
-                      const transKey = item === 'Get Involved' ? 'getInvolved' : item.toLowerCase();
+                      const transKey = item === 'Our Team' ? 'Ourteam' : item.toLowerCase();
                       return (
                          <button
                             key={item}

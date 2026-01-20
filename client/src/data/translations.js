@@ -6,11 +6,11 @@ export const translations = {
     nav: {
       home: "Home",
       about: "About",
-      getInvolved: "Get Involved",
-      getInvolvedMenu: {
-        join: "Join Us",
-        volunteer: "Volunteer",
-        donate: "Donate"
+      Ourteam: "Our Team",
+      OurteamMenu: {
+        executivecommittee: "Executive Committee",
+        general: "General",
+        action: "Action"
       },
       gallery: "Gallery",
       blog: "Blog",
@@ -23,9 +23,8 @@ export const translations = {
       // ✅ ADDED THIS FOR DROPDOWN
       aboutMenu: {
         background: "Background",
-        vision: "Vision & Philosophy",
-        ideology: "Political Ideology",
-        team: "Leadership Team"
+        vision: "Vision",
+        philosophy: "Political Philosophy",
       }
     },
     // Hero Section
@@ -58,11 +57,11 @@ export const translations = {
     nav: {
       home: "முகப்பு",
       about: "எங்களை பற்றி",
-      getInvolved: "பங்களிக்க",
-      getInvolvedMenu: {
-        join: "இணையுங்கள்",
-        volunteer: "தன்னார்வலர்",
-        donate: "நன்கொடை"
+      Ourteam: "பங்களிக்க",
+      OurteamMenu: {
+        executivecommittee: " செயற்குழு",
+        general: " பொது",
+        action: "(எடுக்கப்பட்ட நடவடிக்கை அறிக்கை"
       },
       gallery: "காட்சியகம்",
       blog: "வலைப்பதிவு",
