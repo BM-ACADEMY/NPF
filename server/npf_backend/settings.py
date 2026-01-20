@@ -28,9 +28,10 @@ RENDER_EXTERNAL_HOSTNAME = os.getenv("RENDER_EXTERNAL_HOSTNAME")
 ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
-    "npf1.onrender.com",   # backend render URL
-    "npf-backend-yjip.onrender.com",
+    "npf-backend-yi1p.onrender.com",
+    ".onrender.com",
 ]
+
 
 if RENDER_EXTERNAL_HOSTNAME:
     ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
@@ -207,8 +208,10 @@ CORS_ALLOWED_ORIGINS = [
 
 
 CSRF_TRUSTED_ORIGINS = [
+    "https://npf.vercel.app",
     "https://npf-test.vercel.app",
 ]
+
 
 
 
