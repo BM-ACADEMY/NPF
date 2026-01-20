@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { toast, ToastContainer, Slide } from "react-toastify";
-import { FaDownload, FaIdCard, FaCheckCircle, FaExclamationCircle, FaShieldAlt } from "react-icons/fa";
+import { FaDownload, FaCheckCircle, FaExclamationCircle, FaShieldAlt } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import logo from "../../../assets/npf-logo.jpeg";
 import "react-toastify/dist/ReactToastify.css";
@@ -10,14 +10,14 @@ import "react-toastify/dist/ReactToastify.css";
 import { useLanguage } from "../../../context/LanguageContext";
 import { downloadData } from "../../../data/licensedownload";
 
-// Subtle Document Pattern Background
+// Subtle Document Pattern Background using Brand Blue
 const OfficialBackground = () => (
   <div className="absolute inset-0 pointer-events-none opacity-[0.03]">
     <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <pattern id="doc-grid" width="60" height="60" patternUnits="userSpaceOnUse">
-           <path d="M0 0h60v60H0z" fill="none"/>
-           <path d="M0 60L60 0" stroke="#0F224A" strokeWidth="0.5"/>
+            <path d="M0 0h60v60H0z" fill="none"/>
+            <path d="M0 60L60 0" stroke="#0024f8" strokeWidth="0.5"/>
         </pattern>
       </defs>
       <rect width="100%" height="100%" fill="url(#doc-grid)" />
@@ -99,23 +99,26 @@ export default function MembershipDownload() {
   };
 
   return (
-    <section className="min-h-screen flex items-center justify-center bg-slate-100 relative overflow-hidden py-10">
+    /* Updated background to #f0f0f0 (Equivalent to HSL 0, 0%, 94% and RGB 240, 240, 240) */
+    <section className="min-h-screen flex items-center justify-center bg-[#f0f0f0] relative overflow-hidden py-10">
       <ToastContainer position="top-center" transition={Slide} />
 
-      {/* Tamil Font Import */}
       <style>
         {`
           @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;500;600;700;800&display=swap');
           .font-tamil { font-family: 'Noto Sans Tamil', sans-serif; }
+
+          .npf-blue-text {
+            color: #0024f8;
+          }
         `}
       </style>
 
-      {/* Official Pattern Background */}
       <OfficialBackground />
 
-      {/* Decorative Blur Circles (Cool Blue/Grey) */}
-      <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-slate-300/30 rounded-full blur-[100px] pointer-events-none"></div>
-      <div className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] bg-blue-100/30 rounded-full blur-[100px] pointer-events-none"></div>
+      {/* Decorative Blur Circles using Brand Blue */}
+      <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-[#0024f8]/5 rounded-full blur-[100px] pointer-events-none"></div>
+      <div className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] bg-[#0024f8]/5 rounded-full blur-[100px] pointer-events-none"></div>
 
       <motion.div
         initial={{ opacity: 0, scale: 0.98 }}
@@ -123,42 +126,38 @@ export default function MembershipDownload() {
         transition={{ duration: 0.4 }}
         className="relative z-10 max-w-lg w-full mx-4"
       >
-        {/* --- Card Container --- */}
-        <div className="bg-white rounded-xl shadow-2xl overflow-hidden border border-slate-200">
+        <div className="bg-white rounded-xl shadow-2xl overflow-hidden border border-slate-200/50">
 
             {/* Header Section */}
-            <div className="pt-10 pb-6 px-8 text-center bg-gradient-to-b from-slate-50 to-white border-b border-slate-100">
+            <div className="pt-10 pb-6 px-8 text-center bg-white border-b border-slate-100">
                 <div className="inline-block relative mb-4">
-                   {/* ✅ UPDATED: Force Round Logo */}
-                   <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-white shadow-md flex items-center justify-center bg-white">
-                       <img
-                           src={logo}
-                           alt="Logo"
-                           className="w-full h-full object-cover"
-                       />
-                   </div>
-                   <div className="absolute -bottom-1 -right-1 bg-[#0F224A] text-white p-1.5 rounded-full border-2 border-white shadow-sm z-10">
-                       <FaShieldAlt size={12} />
-                   </div>
+                    <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-[#f0f0f0] shadow-md flex items-center justify-center bg-white">
+                        <img
+                            src={logo}
+                            alt="Logo"
+                            className="w-full h-full object-cover"
+                        />
+                    </div>
+                    <div className="absolute -bottom-1 -right-1 bg-[#0024f8] text-white p-1.5 rounded-full border-2 border-white shadow-sm z-10">
+                        <FaShieldAlt size={12} />
+                    </div>
                 </div>
 
-                <h1 className={`text-2xl font-bold text-[#0F224A] mb-1 ${isTamil ? 'font-tamil' : 'uppercase tracking-tight'}`}>
+                <h1 className={`text-2xl md:text-3xl font-black npf-blue-text mb-2 ${isTamil ? 'font-tamil' : 'uppercase tracking-tight'}`}>
                     {t.title}
                 </h1>
-                <p className={`text-slate-500 text-xs font-semibold uppercase tracking-widest ${isTamil ? 'font-tamil' : ''}`}>
+
+                <p className={`npf-blue-text text-[10px] font-bold uppercase tracking-[0.2em] opacity-80 ${isTamil ? 'font-tamil tracking-wide' : ''}`}>
                     {t.subtitle || "Secure ID Verification"}
                 </p>
             </div>
 
-            {/* Body Section */}
             <div className="p-8 md:p-10">
-
                 <div className="text-center mb-8">
-                    <label className={`block text-slate-400 text-xs font-bold uppercase tracking-wider mb-2 ${isTamil ? 'font-tamil' : ''}`}>
+                    <label className={`block text-[#1a2b48] text-xs font-bold uppercase tracking-wider mb-3 ${isTamil ? 'font-tamil' : ''}`}>
                         {t.placeholder || "Registered Mobile Number"}
                     </label>
 
-                    {/* Input Group */}
                     <div className="relative group">
                         <input
                             type="text"
@@ -167,14 +166,14 @@ export default function MembershipDownload() {
                             onChange={(e) => {
                                 const onlyNums = e.target.value.replace(/\D/g, "");
                                 if (onlyNums.length <= 10) setPhone(onlyNums);
-                                setErrorMsg(""); // Clear error on type
+                                setErrorMsg("");
                             }}
                             maxLength={10}
-                            className={`w-full bg-slate-50 border-2 ${
-                                errorMsg ? "border-red-400 bg-red-50" : "border-slate-200 focus:border-[#0F224A] focus:bg-white"
-                            } outline-none px-6 py-4 rounded-lg text-center text-2xl font-bold tracking-[0.2em] text-[#0F224A] transition-all duration-300 placeholder-slate-300`}
+                            /* Input background updated to match new lighter section BG */
+                            className={`w-full bg-[#f0f0f0]/50 border-2 ${
+                                errorMsg ? "border-red-400 bg-red-50" : "border-slate-100 focus:border-[#0024f8] focus:bg-white"
+                            } outline-none px-6 py-4 rounded-lg text-center text-2xl font-black tracking-[0.2em] text-[#1a2b48] transition-all duration-300 placeholder-slate-300`}
                         />
-                        {/* Success Icon */}
                         {phone.length === 10 && !errorMsg && (
                             <div className="absolute right-4 top-1/2 -translate-y-1/2 text-emerald-500 animate-pulse">
                                 <FaCheckCircle size={22} />
@@ -182,7 +181,6 @@ export default function MembershipDownload() {
                         )}
                     </div>
 
-                    {/* Error Feedback */}
                     <AnimatePresence>
                         {errorMsg && (
                             <motion.div
@@ -197,26 +195,24 @@ export default function MembershipDownload() {
                     </AnimatePresence>
                 </div>
 
-                {/* Loading Bar */}
                 {loading && (
-                    <div className="w-full bg-slate-100 rounded-full h-1.5 mb-6 overflow-hidden">
-                        <div className="h-full bg-[#0F224A] rounded-full transition-all duration-200" style={{ width: `${progress}%` }}></div>
+                    <div className="w-full bg-[#f0f0f0] rounded-full h-1.5 mb-6 overflow-hidden">
+                        <div className="h-full bg-[#0024f8] rounded-full transition-all duration-200" style={{ width: `${progress}%` }}></div>
                     </div>
                 )}
 
-                {/* Action Button */}
                 <button
                     onClick={handleDownload}
                     disabled={loading}
-                    className={`w-full py-4 rounded-lg font-bold text-sm md:text-base shadow-lg transition-all duration-300 flex items-center justify-center gap-2
+                    className={`w-full py-4 rounded-lg font-black text-sm md:text-base shadow-lg transition-all duration-300 flex items-center justify-center gap-2
                         ${loading
-                            ? "bg-slate-300 text-slate-500 cursor-not-allowed"
-                            : "bg-[#0F224A] hover:bg-[#1a3a7a] text-white hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0"
+                            ? "bg-slate-200 text-slate-400 cursor-not-allowed"
+                            : "bg-[#0024f8] hover:bg-[#1a2b48] text-white hover:shadow-blue-200 hover:-translate-y-0.5 active:translate-y-0"
                         } ${isTamil ? 'font-tamil' : 'uppercase tracking-widest'}`}
                 >
                     {loading ? (
                         <>
-                           <svg className="animate-spin h-4 w-4 text-slate-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                           <svg className="animate-spin h-4 w-4 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                               <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                            </svg>
@@ -230,7 +226,6 @@ export default function MembershipDownload() {
                     )}
                 </button>
 
-                {/* Success Message */}
                 {successMsg && (
                     <motion.div
                         initial={{ opacity: 0, y: 10 }}
@@ -242,16 +237,13 @@ export default function MembershipDownload() {
                         </p>
                     </motion.div>
                 )}
-
             </div>
 
-            {/* Footer Strip */}
-            <div className="bg-slate-50 p-4 text-center border-t border-slate-100">
-                 <p className={`text-[10px] text-slate-400 font-bold uppercase tracking-widest ${isTamil ? 'font-tamil' : ''}`}>
+            <div className="bg-[#f0f0f0]/30 p-4 text-center border-t border-slate-100">
+                 <p className={`text-[10px] text-[#1a2b48] font-bold uppercase tracking-widest opacity-60 ${isTamil ? 'font-tamil' : ''}`}>
                     {t.footer || "Official NPF Portal"}
                  </p>
             </div>
-
         </div>
       </motion.div>
     </section>

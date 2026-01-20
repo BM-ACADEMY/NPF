@@ -1,8 +1,29 @@
 @import "tailwindcss";
 
 @theme {
+  /* NPF Brand Colors */
+  --color-npf-blue: #0024f8;
+  --color-npf-red: #ff0000;
+  --color-npf-yellow: #ffff00;
+
+  /* Your existing theme */
   --color-navy: #1a2b48;
   --color-gold: #ffeb00;
   --color-brand-red: #e61e25;
   --color-brand-gray: #f4f4f4;
+}
+
+/* Custom utility for the Tri-Color Text effect */
+@utility npf-gradient-text {
+  background: linear-gradient(
+    to bottom,
+    #0024f8 0%, #0024f8 35%,   /* Blue Top */
+    #ffffff 35%, #ffffff 65%,   /* White Middle */
+    #ff0000 65%, #ff0000 100%   /* Red Bottom */
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  /* Adds the Yellow Outline seen in Banner1/2 */
+  -webkit-text-stroke: 1.5px #ffff00;
+  filter: drop-shadow(2px 2px 0px rgba(0,0,0,0.2));
 }

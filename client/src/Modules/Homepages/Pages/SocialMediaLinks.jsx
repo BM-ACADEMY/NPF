@@ -1,5 +1,5 @@
 import React from "react";
-import { Twitter } from 'lucide-react'; // Ensure lucide-react is installed
+import { Twitter } from 'lucide-react';
 
 const SocialMediaLinks = () => {
 
@@ -18,15 +18,13 @@ const SocialMediaLinks = () => {
       <div className="p-6 text-center flex-grow flex flex-col">
         <div className="flex items-center justify-center gap-3 mb-6">
           <span className="text-3xl">{icon}</span>
-          <h3 className="text-xl font-bold text-slate-800">{title}</h3>
+          <h3 className="text-xl font-bold text-[#1a2b48]">{title}</h3>
         </div>
 
-        {/* Embed Container */}
-        <div className="flex justify-center mb-6 overflow-hidden rounded-xl bg-slate-50 border border-slate-100 min-h-[200px] items-center">
+        <div className="flex justify-center mb-6 overflow-hidden rounded-xl bg-blue-50/30 border border-blue-100 min-h-[200px] items-center">
           {children}
         </div>
 
-        {/* Button */}
         <div className="mt-auto">
           <a
             href={buttonLink}
@@ -56,31 +54,32 @@ const SocialMediaLinks = () => {
   );
 
   return (
-    <section className="relative w-full bg-slate-50 py-20 md:py-28 overflow-hidden">
-      {/* Subtle Background Vector Grid */}
-      <div className="absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:30px_30px] opacity-60 pointer-events-none"></div>
+    <section className="relative w-full bg-white py-20 md:py-28 overflow-hidden">
+
+      {/* Subtle Background Pattern using Brand Blue */}
+      <div className="absolute inset-0 bg-[radial-gradient(#0024f8_1px,transparent_1px)] [background-size:30px_30px] opacity-[0.05] pointer-events-none"></div>
 
       <div className="container mx-auto px-6 relative z-10">
 
         <div className="text-center max-w-3xl mx-auto mb-16">
-
-          <h1 className="text-3xl md:text-5xl font-black text-slate-900 mb-6">
+          {/* Main Title set to Solid Royal Blue */}
+          <h1 className="text-4xl md:text-6xl font-black text-[#0024f8] mb-6 tracking-tighter">
            Social Media
           </h1>
-
+          {/* Decoration line in Brand Blue */}
+          <div className="w-24 h-1.5 bg-[#0024f8] mx-auto rounded-full"></div>
         </div>
 
-        {/* Updated Grid Layout */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-6">
 
           {/* 👍 FACEBOOK */}
           <SocialCard
             title="Facebook"
             icon="📘"
-            color="border-[#1877F2]"
+            color="border-[#0024f8]" // Matched to Brand Blue
             buttonLink="https://www.facebook.com/profile.php?id=61586327415764"
             buttonText="Follow"
-            buttonColor="bg-[#1877F2]"
+            buttonColor="bg-[#0024f8]" // Matched to Brand Blue
           >
             <iframe
               title="NPF Facebook"
@@ -96,10 +95,10 @@ const SocialMediaLinks = () => {
           <SocialCard
             title="Instagram"
             icon="📸"
-            color="border-[#E1306C]"
+            color="border-[#0024f8]" // Matched to Brand Blue
             buttonLink="https://www.instagram.com/npf_pondy/?hl=en"
             buttonText="Follow"
-            buttonColor="bg-gradient-to-r from-[#833ab4] via-[#fd1d1d] to-[#fcb045]"
+            buttonColor="bg-[#0024f8]" // Matched to Brand Blue
           >
             <iframe
               title="NPF Instagram"
@@ -115,12 +114,12 @@ const SocialMediaLinks = () => {
           <SocialCard
             title="Twitter"
             icon="𝕏"
-            color="border-black"
-            buttonLink="https://x.com" // Update with your actual X profile link
+            color="border-[#1a2b48]" // Brand Navy
+            buttonLink="https://x.com"
             buttonText="Follow"
-            buttonColor="bg-black"
+            buttonColor="bg-[#1a2b48]" // Brand Navy
           >
-            <div className="flex flex-col items-center justify-center p-8 text-slate-400">
+            <div className="flex flex-col items-center justify-center p-8 text-[#1a2b48]/40">
               <Twitter size={60} strokeWidth={1.5} />
               <p className="mt-4 text-sm font-medium">@NPF_Official</p>
             </div>
@@ -130,10 +129,10 @@ const SocialMediaLinks = () => {
           <SocialCard
             title="YouTube"
             icon="▶️"
-            color="border-[#FF0000]"
+            color="border-[#0024f8]" // Matched to Brand Blue
             buttonLink="https://www.youtube.com/@NPF-u2"
             buttonText="Subscribe"
-            buttonColor="bg-[#FF0000]"
+            buttonColor="bg-[#0024f8]" // Matched to Brand Blue
           >
             <iframe
               title="NPF YouTube"
