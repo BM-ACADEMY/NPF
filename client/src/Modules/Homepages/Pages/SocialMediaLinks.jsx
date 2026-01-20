@@ -18,10 +18,11 @@ const SocialMediaLinks = () => {
       <div className="p-6 text-center flex-grow flex flex-col">
         <div className="flex items-center justify-center gap-3 mb-6">
           <span className="text-3xl">{icon}</span>
-          <h3 className="text-xl font-bold text-[#1a2b48]">{title}</h3>
+          {/* Card Title updated to match reference font */}
+          <h3 className="text-xl font-black text-[#1a2b48] tracking-tight">{title}</h3>
         </div>
 
-        <div className="flex justify-center mb-6 overflow-hidden rounded-xl bg-blue-50/30 border border-blue-100 min-h-[200px] items-center">
+        <div className="flex justify-center mb-6 overflow-hidden rounded-xl bg-[#f0f0f0]/50 border border-slate-100 min-h-[200px] items-center">
           {children}
         </div>
 
@@ -30,7 +31,7 @@ const SocialMediaLinks = () => {
             href={buttonLink}
             target="_blank"
             rel="noopener noreferrer"
-            className={`inline-flex items-center gap-2 px-6 py-3 rounded-lg font-bold text-white shadow-md transition-all hover:opacity-90 hover:shadow-lg w-full justify-center ${buttonColor}`}
+            className={`inline-flex items-center gap-2 px-6 py-3 rounded-lg font-black text-white shadow-md transition-all hover:opacity-90 hover:shadow-lg w-full justify-center uppercase tracking-widest text-xs ${buttonColor}`}
           >
             {buttonText}
             <svg
@@ -54,19 +55,29 @@ const SocialMediaLinks = () => {
   );
 
   return (
-    <section className="relative w-full bg-white py-20 md:py-28 overflow-hidden">
+    /* Section Background updated to #f0f0f0 */
+    <section className="relative w-full bg-[#f0f0f0] py-20 md:py-28 overflow-hidden">
 
-      {/* Subtle Background Pattern using Brand Blue */}
-      <div className="absolute inset-0 bg-[radial-gradient(#0024f8_1px,transparent_1px)] [background-size:30px_30px] opacity-[0.05] pointer-events-none"></div>
+      <style>
+        {`
+          /* Importing the geometric font from your reference */
+          @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&display=swap');
 
-      <div className="container mx-auto px-6 relative z-10">
+          .font-npf-reference { font-family: 'Inter', sans-serif; }
+        `}
+      </style>
+
+      {/* Subtle Background Pattern matching brand blue */}
+      <div className="absolute inset-0 bg-[radial-gradient(#0024f8_1px,transparent_1px)] [background-size:30px_30px] opacity-[0.03] pointer-events-none"></div>
+
+      <div className="container mx-auto px-6 relative z-10 font-npf-reference">
 
         <div className="text-center max-w-3xl mx-auto mb-16">
-          {/* Main Title set to Solid Royal Blue */}
-          <h1 className="text-4xl md:text-6xl font-black text-[#0024f8] mb-6 tracking-tighter">
+          {/* Main Title updated to Brand Blue and Reference Font */}
+          <h2 className="text-4xl md:text-6xl font-black text-[#0024f8] mb-6 tracking-tighter uppercase">
            Social Media
-          </h1>
-          {/* Decoration line in Brand Blue */}
+          </h2>
+          {/* Decoration line */}
           <div className="w-24 h-1.5 bg-[#0024f8] mx-auto rounded-full"></div>
         </div>
 
@@ -76,10 +87,10 @@ const SocialMediaLinks = () => {
           <SocialCard
             title="Facebook"
             icon="📘"
-            color="border-[#0024f8]" // Matched to Brand Blue
+            color="border-[#0024f8]"
             buttonLink="https://www.facebook.com/profile.php?id=61586327415764"
             buttonText="Follow"
-            buttonColor="bg-[#0024f8]" // Matched to Brand Blue
+            buttonColor="bg-[#0024f8]"
           >
             <iframe
               title="NPF Facebook"
@@ -95,10 +106,10 @@ const SocialMediaLinks = () => {
           <SocialCard
             title="Instagram"
             icon="📸"
-            color="border-[#0024f8]" // Matched to Brand Blue
+            color="border-[#0024f8]"
             buttonLink="https://www.instagram.com/npf_pondy/?hl=en"
             buttonText="Follow"
-            buttonColor="bg-[#0024f8]" // Matched to Brand Blue
+            buttonColor="bg-[#0024f8]"
           >
             <iframe
               title="NPF Instagram"
@@ -114,14 +125,14 @@ const SocialMediaLinks = () => {
           <SocialCard
             title="Twitter"
             icon="𝕏"
-            color="border-[#1a2b48]" // Brand Navy
+            color="border-[#1a2b48]"
             buttonLink="https://x.com"
             buttonText="Follow"
-            buttonColor="bg-[#1a2b48]" // Brand Navy
+            buttonColor="bg-[#1a2b48]"
           >
-            <div className="flex flex-col items-center justify-center p-8 text-[#1a2b48]/40">
+            <div className="flex flex-col items-center justify-center p-8 text-[#1a2b48]/30">
               <Twitter size={60} strokeWidth={1.5} />
-              <p className="mt-4 text-sm font-medium">@NPF_Official</p>
+              <p className="mt-4 text-sm font-black uppercase tracking-widest">@NPF_Official</p>
             </div>
           </SocialCard>
 
@@ -129,10 +140,10 @@ const SocialMediaLinks = () => {
           <SocialCard
             title="YouTube"
             icon="▶️"
-            color="border-[#0024f8]" // Matched to Brand Blue
+            color="border-[#0024f8]"
             buttonLink="https://www.youtube.com/@NPF-u2"
             buttonText="Subscribe"
-            buttonColor="bg-[#0024f8]" // Matched to Brand Blue
+            buttonColor="bg-[#0024f8]"
           >
             <iframe
               title="NPF YouTube"

@@ -32,11 +32,12 @@ const Hero = () => {
   }, [language, currentSlides.length]);
 
   return (
-    <section className="relative w-full overflow-hidden bg-white">
+    /* Updated background to #f0f0f0 without touching any other attributes */
+    <section className="relative w-full overflow-hidden bg-[#f0f0f0]">
 
       <style>
         {`
-          /* Importing Inter for the geometric bold look */
+          /* Applying Inter for the geometric bold look */
           @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
           @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;500;600;700;800;900&display=swap');
 
@@ -50,16 +51,16 @@ const Hero = () => {
           }
 
           .npf-navy-text {
-            color: #1a2b48; /* Matches your --color-navy */
+            color: #1a2b48;
           }
 
           .npf-gold-text {
-            color: #ffeb00; /* Matches your --color-gold */
+            color: #ffeb00;
           }
         `}
       </style>
 
-      {/* Main Container */}
+      {/* Main Container - Added font-npf-reference */}
       <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-16 py-12 md:py-20 relative z-10 font-npf-reference">
 
         <div className="flex flex-col-reverse lg:flex-row items-center gap-10 lg:gap-16">
@@ -67,7 +68,7 @@ const Hero = () => {
           {/* === LEFT: TEXT CONTENT === */}
           <div className="w-full lg:w-3/5 text-center lg:text-left">
 
-            {/* Pill Badge - Updated font weight */}
+            {/* Pill Badge - Font weight set to black (900) */}
             <div className="inline-flex items-center gap-2 py-1.5 px-3 rounded-full bg-blue-50 border border-blue-100 mb-6 animate-fadeIn">
               <span className="w-2 h-2 rounded-full bg-[red]"></span>
               <span className={`npf-navy-text text-[10px] md:text-xs font-black tracking-[0.2em] ${isTamil ? 'font-tamil' : 'uppercase'}`}>
@@ -87,7 +88,7 @@ const Hero = () => {
               {currentSlides[currentSlide].title}
             </h1>
 
-            {/* Description: Reference Font applied */}
+            {/* Description: Inter Font applied */}
             <p
               key={`desc-${currentSlide}-${language}`}
               className={`npf-navy-text opacity-90 mb-10 max-w-xl mx-auto lg:mx-0 animate-slideUp delay-100 ${
@@ -99,7 +100,7 @@ const Hero = () => {
               {currentSlides[currentSlide].desc}
             </p>
 
-            {/* Buttons: Reference Font applied */}
+            {/* Buttons: Inter Font applied */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start animate-slideUp delay-200">
               <Link
                 to="/license"
@@ -126,7 +127,7 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* === RIGHT: IMAGE === */}
+          {/* === RIGHT: IMAGE (UNTOUCHED) === */}
           <div className="w-full lg:w-2/5 flex justify-center lg:justify-end">
             <div className="relative w-full max-w-[350px] md:max-w-md lg:max-w-lg">
               <img
