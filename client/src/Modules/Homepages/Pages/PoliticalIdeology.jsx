@@ -11,6 +11,7 @@ const PoliticalIdeology = () => {
   const { language } = useLanguage();
   const t = politicalIdeologyData[language] || politicalIdeologyData['en'];
   const [expandedId, setExpandedId] = useState(null);
+  const isTamil = language === 'ta';
 
   const ideologies = t.ideologies || [];
 
@@ -32,25 +33,40 @@ const PoliticalIdeology = () => {
   };
 
   return (
+    /* Section Background updated to #f0f0f0 */
     <section
       id="ideology"
-      className="relative w-full bg-[#F8FAFC] py-24 scroll-mt-20 overflow-hidden"
+      className="relative w-full bg-[#f0f0f0] py-24 scroll-mt-20 overflow-hidden font-npf-reference"
     >
-      {/* Subtle Vector Background */}
+      <style>
+        {`
+          @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&display=swap');
+          @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;700;900&display=swap');
+
+          .font-npf-reference { font-family: 'Inter', sans-serif; }
+          .font-tamil { font-family: 'Noto Sans Tamil', sans-serif; }
+        `}
+      </style>
+
+      {/* Subtle Vector Background using Royal Blue */}
       <div className="absolute inset-0 opacity-[0.03] pointer-events-none"
-           style={{ backgroundImage: `radial-gradient(#1a2b4b 0.5px, transparent 0.5px)`, backgroundSize: '30px 30px' }}>
+           style={{ backgroundImage: `radial-gradient(#0024f8 0.5px, transparent 0.5px)`, backgroundSize: '30px 30px' }}>
       </div>
 
       <div className="container mx-auto px-6 relative z-10">
+
         {/* SECTION HEADER */}
         <div className="max-w-3xl mb-16">
-          <span className="text-[#1a2b4b] font-bold tracking-[0.2em] uppercase text-xs mb-4 block">
-            Core Principles
+          {/* Tag updated to Brand Red */}
+          <span className={`text-[#ff0000] font-black tracking-[0.3em] uppercase text-xs mb-4 block ${isTamil ? 'font-tamil' : ''}`}>
+             Core Principles
           </span>
-          <h2 className="text-4xl md:text-6xl font-black tracking-tighter text-[#1a2b4b]">
+          {/* Header updated to Inter 900 Navy */}
+          <h2 className={`text-4xl md:text-6xl font-black tracking-tighter text-[#1a2b4b] uppercase leading-none ${isTamil ? 'font-tamil' : ''}`}>
             {t.title}
           </h2>
-          <div className="w-20 h-1.5 bg-[#FACC15] mt-8"></div>
+          {/* Accent Bar updated to Royal Blue */}
+          <div className="w-20 h-2 bg-[#0024f8] mt-8 rounded-full"></div>
         </div>
 
         {/* INTERACTIVE STACK */}
@@ -63,28 +79,28 @@ const PoliticalIdeology = () => {
                 key={item.id}
                 onClick={() => toggleExpand(item.id)}
                 className={`group cursor-pointer transition-all duration-500 rounded-2xl border
-                  /* HOVER & ACTIVE STATE: BOX TURNS BLUE */
-                  ${isExpanded || 'hover:bg-[#1a2b4b] hover:border-[#1a2b4b] hover:shadow-2xl'}
-                  ${isExpanded ? 'bg-[#1a2b4b] border-[#1a2b4b] shadow-2xl' : 'bg-white border-slate-200'}`}
+                  /* HOVER & ACTIVE STATE: BOX TURNS ROYAL BLUE */
+                  ${isExpanded || 'hover:bg-[#0024f8] hover:border-[#0024f8] hover:shadow-2xl'}
+                  ${isExpanded ? 'bg-[#0024f8] border-[#0024f8] shadow-2xl' : 'bg-white border-[#1a2b4b]/5 shadow-sm'}`}
               >
                 <div className="flex items-center p-6 md:p-10 gap-6">
-                  {/* Icon: Turns Yellow on Hover/Active */}
+                  {/* Icon: Turns White on Hover/Active */}
                   <div className={`transition-colors duration-500
-                    ${isExpanded ? 'text-[#FACC15]' : 'text-[#1a2b4b] group-hover:text-[#FACC15]'}`}>
+                    ${isExpanded ? 'text-white' : 'text-[#0024f8] group-hover:text-white'}`}>
                     {icons[item.id]}
                   </div>
 
                   {/* Title: Turns White on Hover/Active */}
                   <div className="flex-grow">
-                    <h3 className={`text-xl md:text-2xl font-bold tracking-tight transition-colors duration-500
-                      ${isExpanded ? 'text-white' : 'text-[#1a2b4b] group-hover:text-white'}`}>
+                    <h3 className={`text-xl md:text-2xl font-black uppercase tracking-tight transition-colors duration-500
+                      ${isExpanded ? 'text-white' : 'text-[#1a2b4b] group-hover:text-white'} ${isTamil ? 'font-tamil' : ''}`}>
                       {item.title}
                     </h3>
                   </div>
 
-                  {/* Arrow Indicator */}
+                  {/* Arrow Indicator: Turns White */}
                   <div className={`transition-all duration-500 p-2 rounded-full
-                    ${isExpanded ? 'bg-[#FACC15] text-[#1a2b4b] rotate-180' : 'text-slate-300 group-hover:text-white'}`}>
+                    ${isExpanded ? 'bg-white/20 text-white rotate-180' : 'text-slate-300 group-hover:text-white'}`}>
                     <ChevronDown size={24} />
                   </div>
                 </div>
@@ -97,7 +113,7 @@ const PoliticalIdeology = () => {
                   <div className="px-10 md:px-24 pb-12">
                     <div className="pt-8 border-t border-white/10 space-y-6">
                       {item.content.map((para, idx) => (
-                        <p key={idx} className="text-lg leading-relaxed text-blue-100/90 text-justify">
+                        <p key={idx} className={`text-lg leading-relaxed text-white/90 text-justify font-medium ${isTamil ? 'font-tamil' : ''}`}>
                           {para}
                         </p>
                       ))}
