@@ -14,30 +14,35 @@ export default function Login() {
   const [error, setError] = useState("");
 
   const handleLogin = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setError("");
+  e.preventDefault();
+  setLoading(true);
+  setError("");
 
-    try {
-      const res = await axios.post(
-        import.meta.env.VITE_API_BASE_URL + "/admin/login/",
-        { email, password },
-        { headers: { "Content-Type": "application/json" } }
-      );
+  try {
+    const res = await axios.post(
+      `${import.meta.env.VITE_API_BASE_URL}/api/auth/login/`,
+      { email, password },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
-      setTokens({
-        access: res.data.access,
-        refresh: res.data.refresh,
-      });
+    setTokens({
+      access: res.data.access,
+      refresh: res.data.refresh,
+    });
 
-      navigate("/admin/gallery");
-    } catch (err) {
-      console.error(err);
-      setError("Access Denied. Please check your credentials.");
-    } finally {
-      setLoading(false);
-    }
-  };
+    navigate("/admin/gallery");
+  } catch (err) {
+    console.error("Login error:", err.response || err);
+    setError("Access Denied. Please check your credentials.");
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <div className="min-h-screen flex w-full bg-white">
