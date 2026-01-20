@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { ChevronRight, ArrowRight } from "lucide-react";
 
 // ✅ 1. Import your Image
-import HeroImage1 from "../../../assets/npf_Hero.jpeg";
+import HeroImage1 from "../../../assets/npf_hero.png";
 
 // ✅ 2. Import the Language Context & New Data File
 import { useLanguage } from "../../../context/LanguageContext";
@@ -136,22 +136,21 @@ const Hero = () => {
 
           {/* === RIGHT: IMAGE SLIDER === */}
           <div className="w-full lg:w-1/2 flex justify-center lg:justify-end relative px-4 sm:px-0">
-              {/* ✅ FIXED: Professional Image Container */}
-              <div className="relative w-full max-w-[350px] md:max-w-md lg:max-w-lg group">
 
-                {/* 1. Soft, Layered Shadow Effect (Replaces the solid border block) */}
-                <div className="hidden sm:block absolute inset-0 bg-amber-100/50 rounded-[2rem] transform translate-x-4 translate-y-4 md:translate-x-6 md:translate-y-6 blur-md -z-20 transition-all group-hover:translate-x-5 group-hover:translate-y-5 group-hover:blur-lg"></div>
-                <div className="hidden sm:block absolute inset-0 bg-blue-100/30 rounded-[2rem] transform translate-x-2 translate-y-2 md:translate-x-3 md:translate-y-3 blur-sm -z-10 transition-all group-hover:translate-x-3 group-hover:translate-y-3"></div>
+            {/* Container constrains width, but has no background/border itself */}
+            <div className="relative w-full max-w-[350px] md:max-w-md lg:max-w-lg">
+              <img
+                src={HeroImage1}
+                alt="Hero"
+                /* Changes made:
+                   1. Removed 'rounded-3xl', 'shadow-2xl', 'bg-white', 'border-4' wrapper.
+                   2. Changed height to 'h-auto' so the image keeps its natural aspect ratio.
+                   3. Kept the hover scale effect.
+                */
+                className="w-full h-auto object-contain transform transition-transform duration-700 hover:scale-105"
+              />
+            </div>
 
-                {/* 2. Clean Image Container with Border */}
-                <div className="rounded-3xl md:rounded-[2.5rem] overflow-hidden shadow-2xl bg-white border-4 border-white relative z-10">
-                  <img
-                    src={HeroImage1}
-                    alt="Hero"
-                    className="w-full h-[300px] sm:h-[400px] md:h-[450px] lg:h-[550px] object-cover transform transition-transform duration-700 group-hover:scale-105"
-                  />
-                </div>
-              </div>
           </div>
 
         </div>
