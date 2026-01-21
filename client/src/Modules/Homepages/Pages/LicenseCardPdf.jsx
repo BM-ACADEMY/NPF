@@ -19,52 +19,74 @@ export default function LicenseCardPdf({ license = {} }) {
   const safeName = sanitize(license.name);
 
   // PDF Generation with Explicit Dimensions for perfect alignment
-  const downloadPdf = async () => {
-    try {
-      const canvas = await html2canvas(cardRef.current, {
-        scale: 3,
-        useCORS: true,
-        width: 340,
-        height: 520,
-        logging: false
-      });
-      const imgData = canvas.toDataURL("image/jpeg", 1.0);
-      const pdf = new jsPDF({ orientation: "portrait", unit: "px", format: [340, 520] });
-      pdf.addImage(imgData, "JPEG", 0, 0, 340, 520);
-      pdf.save(`npf_${safeName}.pdf`);
-    } catch (err) {
-      toast.error("PDF generation failed");
+  // PDF Generation with Fix for Right-Side Shrinking
+const downloadPdf = async () => {
+  try {
+    const element = cardRef.current;
+    const canvas = await html2canvas(element, {
+      scale: 3,             // High quality
+      useCORS: true,        // Allow images from other domains
+      logging: false,
+      width: 340,           // Force specific width
+      height: 520,          // Force specific height
+      windowWidth: 1920,    // Pretend the browser is wide to avoid responsive shrinking
+      windowHeight: 1080,
+      x: 0,                 // Explicitly start at 0
+      y: 0,
+    });
+
+    const imgData = canvas.toDataURL("image/jpeg", 1.0);
+    // Create PDF with exactly the same aspect ratio (340x520)
+    const pdf = new jsPDF({
+      orientation: "portrait",
+      unit: "px",
+      format: [340, 520]
+    });
+
+    pdf.addImage(imgData, "JPEG", 0, 0, 340, 520);
+    pdf.save(`npf_${safeName}.pdf`);
+  } catch (err) {
+    console.error(err);
+    toast.error("PDF generation failed");
+  }
+};
+
+const approveAndUpload = async () => {
+  try {
+    setLoading(true);
+    const element = cardRef.current;
+    const canvas = await html2canvas(element, {
+      scale: 3,
+      useCORS: true,
+      width: 340,
+      height: 520,
+      windowWidth: 1920, // Prevents layout shifts during capture
+    });
+
+    const imgData = canvas.toDataURL("image/jpeg", 1.0);
+    const pdf = new jsPDF({ orientation: "portrait", unit: "px", format: [340, 520] });
+    pdf.addImage(imgData, "JPEG", 0, 0, 340, 520);
+
+    const pdfBlob = pdf.output("blob");
+    const formData = new FormData();
+    formData.append("pdf_file", pdfBlob, `npf_${safeName}.pdf`);
+
+    const res = await API.post(`/npf/${license._id}/upload_pdf/`, formData, {
+      headers: { "Content-Type": "multipart/form-data" }
+    });
+
+    const whatsLink = res.data?.whatsapp_link;
+    toast.success("Approved successfully!");
+    if (whatsLink) {
+      try { navigator.clipboard.writeText(whatsLink); toast.info("WhatsApp link copied!"); } catch {}
+      setTimeout(() => window.open(whatsLink, "_blank", "noopener,noreferrer"), 200);
     }
-  };
-
-  const approveAndUpload = async () => {
-    try {
-      setLoading(true);
-      const canvas = await html2canvas(cardRef.current, { scale: 3, useCORS: true, width: 340, height: 520 });
-      const imgData = canvas.toDataURL("image/jpeg", 1.0);
-      const pdf = new jsPDF({ orientation: "portrait", unit: "px", format: [340, 520] });
-      pdf.addImage(imgData, "JPEG", 0, 0, 340, 520);
-
-      const pdfBlob = pdf.output("blob");
-      const formData = new FormData();
-      formData.append("pdf_file", pdfBlob, `npf_${safeName}.pdf`);
-
-      const res = await API.post(`/npf/${license._id}/upload_pdf/`, formData, {
-        headers: { "Content-Type": "multipart/form-data" }
-      });
-
-      const whatsLink = res.data?.whatsapp_link;
-      toast.success("Approved successfully!");
-      if (whatsLink) {
-        try { navigator.clipboard.writeText(whatsLink); toast.info("WhatsApp link copied!"); } catch {}
-        setTimeout(() => window.open(whatsLink, "_blank", "noopener,noreferrer"), 200);
-      }
-    } catch (err) {
-      toast.error("Upload failed: " + (err.response?.data?.error || err.message));
-    } finally {
-      setLoading(false);
-    }
-  };
+  } catch (err) {
+    toast.error("Upload failed: " + (err.response?.data?.error || err.message));
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div className="flex flex-col items-center p-8 bg-slate-50 min-h-screen">

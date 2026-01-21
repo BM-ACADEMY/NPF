@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { Menu, X, ChevronDown, ArrowRight } from "lucide-react";
+import { Menu, X, ChevronDown, ArrowRight, Download } from "lucide-react";
 import Logo from "../../../assets/npf-logo.jpeg";
 import { useLanguage } from "../../../context/LanguageContext";
 import LanguageToggle from "../../language/LanguageToggle";
@@ -14,6 +14,7 @@ const PATHS = {
   BLOG: "/blog",
   CONTACT: "/contact",
   LICENSE: "/license",
+  DOWNLOAD: "/license/download",
 };
 
 const NAV_ITEMS = [
@@ -33,6 +34,7 @@ const NAV_ITEMS = [
   { id: 'Gallery', path: PATHS.GALLERY, transKey: 'gallery' },
   { id: 'Blog', path: PATHS.BLOG, transKey: 'blog' },
   { id: 'Contact', path: PATHS.CONTACT, transKey: 'contact' },
+  { id: 'Download', path: PATHS.DOWNLOAD, transKey: 'download' },
 ];
 
 const Header = () => {
@@ -48,7 +50,7 @@ const Header = () => {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      const threshold = window.innerWidth < 1024 ? 15 : 40;
+      const threshold = 40;
 
       if (currentScrollY < threshold) {
         setIsCompact(false);
@@ -92,16 +94,18 @@ const Header = () => {
             will-change: transform;
           }
 
+          /* Value adjusted to -128px to hide Row 1 perfectly with the new moderate padding */
           .header-compact {
-            transform: translateY(-140px);
+            transform: translateY(-128px);
           }
 
           @media (max-width: 1023px) {
-            .header-compact { transform: translateY(-105px); }
+            .header-compact { transform: translateY(-98px); }
           }
         `}
       </style>
 
+      {/* spacer to prevent content jump */}
       <div className="h-[145px] lg:h-[185px] bg-transparent" />
 
       <header
@@ -115,7 +119,7 @@ const Header = () => {
         </div>
 
         {/* --- ROW 1: FULL BRANDING --- */}
-        <div className="container mx-auto px-4 lg:px-16 py-5 lg:py-7">
+        <div className="container mx-auto px-4 lg:px-16 py-5 lg:py-6">
           <div className="flex items-center justify-between">
             <Link to={PATHS.HOME} className="flex items-center gap-3 shrink-0">
               <div className="w-12 h-12 md:w-16 lg:w-20 md:h-16 lg:h-20 overflow-hidden bg-white rounded-full border-2 border-[#f0f0f0] shadow-sm">
@@ -136,12 +140,14 @@ const Header = () => {
           </div>
         </div>
 
-        {/* --- ROW 2: NAV & COMPACT BRANDING --- */}
+        {/* --- ROW 2: NAV & COMPACT BRANDING (Refined Moderate Size) --- */}
         <div className="border-t border-gray-100 bg-white/95 backdrop-blur-md">
-          <div className="container mx-auto px-4 lg:px-16 flex items-center justify-between py-3 lg:py-3">
+          {/* Reduced padding slightly from py-3.5/py-4 to py-2.5/py-3 */}
+          <div className="container mx-auto px-4 lg:px-16 flex items-center justify-between py-2.5 lg:py-3">
 
+            {/* Compact Branding - Reduced Logo size from w-11 to w-9/10 */}
             <div className={`flex items-center gap-3 transition-all duration-500 ${isCompact ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-4 pointer-events-none"}`}>
-               <img src={Logo} alt="Logo" className="w-10 h-10 md:w-11 md:h-11 rounded-full border border-gray-100 shadow-md" />
+               <img src={Logo} alt="Logo" className="w-9 h-9 md:w-10 md:h-10 rounded-full border-2 border-gray-100 shadow-md" />
                <div className="flex flex-col">
                   <h2 className={`font-black text-[#1a2b48] leading-none ${isTamil ? "font-tamil text-xs md:text-sm" : "text-xs md:text-base uppercase tracking-tighter"}`}>
                     <span className="hidden lg:block">{isTamil ? "தேசிய மக்கள் முன்னணி" : t.nav.menuTitle}</span>
@@ -150,20 +156,22 @@ const Header = () => {
                </div>
             </div>
 
-            <nav className={`hidden lg:flex items-center space-x-2 transition-all duration-500 ${isCompact ? "ml-auto mr-8" : ""}`}>
+            {/* Navigation Items */}
+            <nav className={`hidden lg:flex items-center space-x-1 transition-all duration-500 ${isCompact ? "ml-auto mr-8" : ""}`}>
               {NAV_ITEMS.map((item) => {
                 const label = t.nav[item.transKey];
                 const isActive = location.pathname === item.path;
 
+                // Slightly smaller text for refined look
                 const linkStyle = isTamil
-                  ? `px-4 py-2 font-tamil text-[14px] font-black transition-all duration-300 border-b-2 ${isActive ? 'text-[#ff0000] border-[#ff0000]' : 'text-[#1a2b48] border-transparent hover:text-[#ff0000]'}`
-                  : `px-4 py-2 text-[12px] font-black uppercase tracking-widest transition-all duration-300 border-b-2 ${isActive ? 'text-[#ff0000] border-[#ff0000]' : 'text-[#1a2b48] border-transparent hover:text-[#ff0000]'}`;
+                  ? `px-3 py-1.5 font-tamil text-[13px] md:text-[14px] font-black transition-all duration-300 border-b-2 ${isActive ? 'text-[#ff0000] border-[#ff0000]' : 'text-[#1a2b48] border-transparent hover:text-[#ff0000]'}`
+                  : `px-3 py-1.5 text-[11px] md:text-[12px] font-black uppercase tracking-widest transition-all duration-300 border-b-2 ${isActive ? 'text-[#ff0000] border-[#ff0000]' : 'text-[#1a2b48] border-transparent hover:text-[#ff0000]'}`;
 
                 if (item.subMenu) {
                   return (
                     <div key={item.id} className="relative group flex items-center">
                       <button className={`${linkStyle} flex items-center gap-1`}>
-                        {label} <ChevronDown size={16} strokeWidth={3} className="group-hover:rotate-180 transition-transform duration-300" />
+                        {label} <ChevronDown size={14} strokeWidth={3} className="group-hover:rotate-180 transition-transform duration-300" />
                       </button>
                       <div className="absolute top-full left-0 w-56 bg-white shadow-2xl border-t-[4px] border-[#0024f8] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 p-2 z-[100] rounded-b-lg">
                         {item.subMenu.map((sub) => (
@@ -172,7 +180,6 @@ const Header = () => {
                             onClick={() => handleNavClick(item.path, sub)}
                             className={`block w-full text-left px-4 py-3 rounded hover:bg-gray-50 text-[#1a2b48] transition-colors ${isTamil ? "font-tamil text-sm font-black" : "text-[11px] font-black uppercase tracking-wider"}`}
                           >
-                            {/* Dynamically access the correct sub-menu translation object */}
                             {item.id === 'About' ? t.nav.aboutMenu[sub] : t.nav.OurteamMenu[sub]}
                           </button>
                         ))}
@@ -182,26 +189,28 @@ const Header = () => {
                 }
 
                 return (
-                  <button key={item.id} onClick={() => handleNavClick(item.path)} className={linkStyle}>
+                  <button key={item.id} onClick={() => handleNavClick(item.path)} className={`${linkStyle} flex items-center gap-2`}>
+                    {item.id === 'Download' && <Download size={14} strokeWidth={2.5} />}
                     {label}
                   </button>
                 );
               })}
             </nav>
 
-            <div className="flex items-center gap-3 md:gap-5 ml-auto lg:ml-0">
-              {isCompact && <div className="hidden lg:block scale-100"><LanguageToggle /></div>}
+            <div className="flex items-center gap-3 md:gap-4 ml-auto lg:ml-0">
+              {isCompact && <div className="hidden lg:block scale-95"><LanguageToggle /></div>}
 
+              {/* Action Button - Refined sizing */}
               <button
                 onClick={() => navigate(PATHS.LICENSE)}
-                className="hidden lg:flex bg-[#ff0000] text-white px-5 lg:px-8 py-3 rounded-sm font-black uppercase text-[11px] lg:text-[12px] tracking-widest shadow-xl hover:bg-[#0024f8] transition-all items-center gap-2 group shrink-0"
+                className="hidden lg:flex bg-[#ff0000] text-white px-5 lg:px-6 py-2.5 rounded-sm font-black uppercase text-[11px] tracking-widest shadow-xl hover:bg-[#0024f8] transition-all items-center gap-2 group shrink-0"
               >
                 <span className={isTamil ? "font-tamil" : ""}>{t.nav.joinUs}</span>
-                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
               </button>
 
               <button onClick={() => setIsMenuOpen(true)} className="lg:hidden p-2 text-[#1a2b48]">
-                <Menu size={36} />
+                <Menu size={32} />
               </button>
             </div>
           </div>
@@ -222,13 +231,14 @@ const Header = () => {
                    <button
                      key={item.id}
                      onClick={() => handleNavClick(item.path)}
-                     className={`text-xl font-black text-[#1a2b48] text-left border-b border-gray-50 py-4 ${isTamil ? 'font-tamil' : 'uppercase'}`}
+                     className={`flex items-center gap-3 text-xl font-black text-[#1a2b48] text-left border-b border-gray-50 py-4 ${isTamil ? 'font-tamil' : 'uppercase'}`}
                    >
+                     {item.id === 'Download' && <Download size={20} className="text-[#0024f8]" />}
                      {t.nav[item.transKey]}
                    </button>
                 ))}
                 <div className="mt-8 flex flex-col gap-4">
-                   <button onClick={() => handleNavClick(PATHS.LICENSE)} className="w-full bg-[#1a2b48] text-white py-4 rounded-xl font-black text-xs uppercase">
+                   <button onClick={() => handleNavClick(PATHS.LICENSE)} className="w-full bg-[#ff0000] text-white py-4 rounded-xl font-black text-xs uppercase shadow-lg">
                      {t.nav.joinUs}
                    </button>
                    <div className="flex justify-center mt-4"><LanguageToggle /></div>
