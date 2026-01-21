@@ -62,7 +62,7 @@ const PoliticalIdeology = () => {
              Core Principles
           </span>
           {/* Header updated to Inter 900 Navy */}
-          <h2 className={`text-4xl md:text-6xl font-black tracking-tighter text-[#1a2b4b] uppercase leading-none ${isTamil ? 'font-tamil' : ''}`}>
+          <h2 className={`text-4xl md:text-6xl font-black tracking-tighter text-[#0024f8] uppercase leading-none ${isTamil ? 'font-tamil' : ''}`}>
             {t.title}
           </h2>
           {/* Accent Bar updated to Royal Blue */}

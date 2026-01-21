@@ -31,7 +31,7 @@ const OurTeam = () => {
       `}</style>
 
       {/* --- SECTION 1: NAVY HERO BANNER --- */}
-      <div className="relative z-10 bg-[#1a2b48] py-24 md:py-32 text-center text-white px-6">
+      <div className="relative z-10 bg-[white] py-24 md:py-32 text-center text-[#0024f8] px-6">
         {/* Decorative Red Tag */}
         <span className={`text-[#ff0000] font-black tracking-[0.4em] uppercase text-xs mb-4 block ${isTamil ? 'font-tamil' : ''}`}>
           {isTamil ? "எங்கள் தலைமை" : "Our Leadership"}

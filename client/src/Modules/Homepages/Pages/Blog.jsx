@@ -95,7 +95,7 @@ const BlogHome = () => {
             <div className="flex items-center gap-3 mb-2">
                 {/* Vertical Blue Bar */}
                 <div className="w-1.5 h-10 bg-[#0024f8]"></div>
-                <span className={`text-[#1a2b48] font-extrabold uppercase tracking-[0.2em] text-xs ${isTamil ? 'font-tamil' : ''}`}>
+                <span className={`text-[red] font-extrabold uppercase tracking-[0.2em] text-xs ${isTamil ? 'font-tamil' : ''}`}>
                     {t.tag || "Latest Updates"}
                 </span>
             </div>
@@ -103,7 +103,7 @@ const BlogHome = () => {
             <h2 className={`text-5xl md:text-8xl font-black text-[#0024f8] leading-none uppercase ${isTamil ? 'font-tamil' : 'tracking-tighter'}`}>
                 {isTamil ? "செய்திகள்" : "Political"}
             </h2>
-           
+
         </div>
 
         {/* --- Card Grid from Reference --- */}

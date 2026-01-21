@@ -13,7 +13,7 @@ export const translations = {
         action: "Action"
       },
       gallery: "Gallery",
-      blog: "Blog",
+      blog: "Events",
       contact: "Contact",
       downloadId: "Download ID",
       joinUs: "Join Us",
@@ -64,7 +64,7 @@ export const translations = {
         action: "(எடுக்கப்பட்ட நடவடிக்கை அறிக்கை"
       },
       gallery: "காட்சியகம்",
-      blog: "வலைப்பதிவு",
+      blog: "நிகழ்வுகள்",
       contact: "தொடர்புக்கு",
       downloadId: "ஐடி பதிவிறக்கம்",
       joinUs: "இணையுங்கள்",
