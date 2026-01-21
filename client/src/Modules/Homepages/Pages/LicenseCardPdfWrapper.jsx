@@ -1,4 +1,3 @@
-// client/src/Modules/Homepages/Pages/LicenseCardPdfWrapper.jsx
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import API from "../../../api";
@@ -12,6 +11,7 @@ export default function LicenseCardPdfWrapper() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // Fetch individual member record for NPF project
     API.get(`/npf/${id}/`)
       .then((res) => {
         setLicense(res.data);
@@ -20,17 +20,64 @@ export default function LicenseCardPdfWrapper() {
       .catch((err) => {
         console.error("Load error:", err);
         setLoading(false);
-        alert("Failed to load record");
+        // Using alert as a fallback, but toast is preferred if available globally
       });
   }, [id]);
 
-  if (loading) return <div className="p-10 text-center text-gray-600"><p>Loading details...</p></div>;
-  if (!license) return <div className="p-10 text-center text-red-600"><p>Record not found</p><button onClick={() => navigate(-1)} className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-md">Go Back</button></div>;
+  // Loading state with brand-consistent text
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-slate-50">
+        <div className="flex flex-col items-center gap-4">
+          <div className="w-10 h-10 border-4 border-[#0024f8] border-t-transparent rounded-full animate-spin"></div>
+          <p className="text-[#1a2b48] font-bold uppercase tracking-widest text-xs">Loading NPF Member Details...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Error state using brand Red (#ff0000)
+  if (!license) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center bg-slate-50 p-6">
+        <div className="bg-white p-8 rounded-lg shadow-xl text-center max-w-md border-t-4 border-[#ff0000]">
+          <p className="text-[#1a2b48] font-black text-xl mb-2 uppercase">Record Not Found</p>
+          <p className="text-gray-500 text-sm mb-6">The membership record you are looking for does not exist or has been removed.</p>
+          <button
+            onClick={() => navigate(-1)}
+            className="w-full py-3 bg-[#1a2b48] text-white rounded-sm font-bold uppercase text-xs tracking-widest hover:bg-[#0024f8] transition-all"
+          >
+            Go Back
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="p-6">
-      <button onClick={() => navigate(-1)} className="mb-4 px-4 py-2 bg-gray-700 text-white rounded-md">← Back</button>
-      <LicenseCardPdf license={license} />
+    <div className="min-h-screen bg-slate-50 p-4 md:p-8">
+      <div className="max-w-7xl mx-auto">
+        {/* Navigation Header */}
+        <div className="mb-8 flex items-center justify-between">
+          <button
+            onClick={() => navigate(-1)}
+            className="flex items-center gap-2 px-6 py-2.5 bg-[#1a2b48] text-white rounded-sm font-bold uppercase text-[10px] tracking-widest hover:bg-[#0024f8] transition-all shadow-md"
+          >
+            <span className="text-lg leading-none">←</span> Back to List
+          </button>
+
+          <div className="hidden md:block">
+            <p className="text-[#1a2b48] font-black uppercase text-xs tracking-tighter">
+              Member Administration <span className="text-[#0024f8]">/ License Generation</span>
+            </p>
+          </div>
+        </div>
+
+        {/* The Card Component */}
+        <div className="flex justify-center">
+          <LicenseCardPdf license={license} />
+        </div>
+      </div>
     </div>
   );
 }
