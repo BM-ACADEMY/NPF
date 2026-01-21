@@ -57,7 +57,7 @@ export const translations = {
     nav: {
       home: "முகப்பு",
       about: "எங்களை பற்றி",
-      Ourteam: "பங்களிக்க",
+      Ourteam: "எங்கள் குழு",
       OurteamMenu: {
         executivecommittee: " செயற்குழு",
         general: " பொது",
