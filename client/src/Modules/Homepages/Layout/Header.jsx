@@ -5,6 +5,36 @@ import Logo from "../../../assets/npf-logo.jpeg";
 import { useLanguage } from "../../../context/LanguageContext";
 import LanguageToggle from "../../language/LanguageToggle";
 
+// --- NAVIGATION CONFIGURATION ---
+const PATHS = {
+  HOME: "/",
+  ABOUT: "/about",
+  OUR_TEAM: "/our-team",
+  GALLERY: "/gallery",
+  BLOG: "/blog",
+  CONTACT: "/contact",
+  LICENSE: "/license",
+};
+
+const NAV_ITEMS = [
+  { id: 'Home', path: PATHS.HOME, transKey: 'home' },
+  {
+    id: 'About',
+    path: PATHS.ABOUT,
+    transKey: 'about',
+    subMenu: ['background', 'vision', 'philosophy']
+  },
+  {
+    id: 'Our Team',
+    path: PATHS.OUR_TEAM,
+    transKey: 'Ourteam',
+    subMenu: ['executivecommittee', 'general', 'action']
+  },
+  { id: 'Gallery', path: PATHS.GALLERY, transKey: 'gallery' },
+  { id: 'Blog', path: PATHS.BLOG, transKey: 'blog' },
+  { id: 'Contact', path: PATHS.CONTACT, transKey: 'contact' },
+];
+
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCompact, setIsCompact] = useState(false);
@@ -34,11 +64,10 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleNavClick = (path) => {
+  const handleNavClick = (path, hash = null) => {
     setIsMenuOpen(false);
-    if (path.includes('#')) {
-      const [route, hash] = path.split('#');
-      navigate(route);
+    if (hash) {
+      navigate(path);
       setTimeout(() => {
         const element = document.getElementById(hash);
         if (element) element.scrollIntoView({ behavior: 'smooth' });
@@ -48,8 +77,6 @@ const Header = () => {
       window.scrollTo(0, 0);
     }
   };
-
-  const navItems = ['Home', 'About', 'Our Team', 'Gallery', 'Blog', 'Contact'];
 
   return (
     <>
@@ -90,7 +117,7 @@ const Header = () => {
         {/* --- ROW 1: FULL BRANDING --- */}
         <div className="container mx-auto px-4 lg:px-16 py-5 lg:py-7">
           <div className="flex items-center justify-between">
-            <Link to="/" className="flex items-center gap-3 shrink-0">
+            <Link to={PATHS.HOME} className="flex items-center gap-3 shrink-0">
               <div className="w-12 h-12 md:w-16 lg:w-20 md:h-16 lg:h-20 overflow-hidden bg-white rounded-full border-2 border-[#f0f0f0] shadow-sm">
                 <img src={Logo} alt="Logo" className="w-full h-full object-cover" />
               </div>
@@ -124,29 +151,29 @@ const Header = () => {
             </div>
 
             <nav className={`hidden lg:flex items-center space-x-2 transition-all duration-500 ${isCompact ? "ml-auto mr-8" : ""}`}>
-              {navItems.map((item) => {
-                const transKey = item === 'Our Team' ? 'Ourteam' : item.toLowerCase();
-                const label = t.nav[transKey];
-                const isActive = location.pathname === (item === 'Home' ? '/' : `/${item.toLowerCase()}`);
+              {NAV_ITEMS.map((item) => {
+                const label = t.nav[item.transKey];
+                const isActive = location.pathname === item.path;
 
                 const linkStyle = isTamil
                   ? `px-4 py-2 font-tamil text-[14px] font-black transition-all duration-300 border-b-2 ${isActive ? 'text-[#ff0000] border-[#ff0000]' : 'text-[#1a2b48] border-transparent hover:text-[#ff0000]'}`
                   : `px-4 py-2 text-[12px] font-black uppercase tracking-widest transition-all duration-300 border-b-2 ${isActive ? 'text-[#ff0000] border-[#ff0000]' : 'text-[#1a2b48] border-transparent hover:text-[#ff0000]'}`;
 
-                if (item === 'About' || item === 'Our Team') {
+                if (item.subMenu) {
                   return (
-                    <div key={item} className="relative group flex items-center">
+                    <div key={item.id} className="relative group flex items-center">
                       <button className={`${linkStyle} flex items-center gap-1`}>
                         {label} <ChevronDown size={16} strokeWidth={3} className="group-hover:rotate-180 transition-transform duration-300" />
                       </button>
                       <div className="absolute top-full left-0 w-56 bg-white shadow-2xl border-t-[4px] border-[#0024f8] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 p-2 z-[100] rounded-b-lg">
-                        {(item === 'About' ? ['background', 'vision', 'philosophy'] : ['executivecommittee', 'general', 'action']).map((sub) => (
+                        {item.subMenu.map((sub) => (
                           <button
                             key={sub}
-                            onClick={() => handleNavClick(item === 'About' ? `/about#${sub}` : `/our-team#${sub}`)}
+                            onClick={() => handleNavClick(item.path, sub)}
                             className={`block w-full text-left px-4 py-3 rounded hover:bg-gray-50 text-[#1a2b48] transition-colors ${isTamil ? "font-tamil text-sm font-black" : "text-[11px] font-black uppercase tracking-wider"}`}
                           >
-                            {item === 'About' ? t.nav.aboutMenu[sub] : t.nav.OurteamMenu[sub]}
+                            {/* Dynamically access the correct sub-menu translation object */}
+                            {item.id === 'About' ? t.nav.aboutMenu[sub] : t.nav.OurteamMenu[sub]}
                           </button>
                         ))}
                       </div>
@@ -155,20 +182,18 @@ const Header = () => {
                 }
 
                 return (
-                  <button key={item} onClick={() => navigate(item === 'Home' ? '/' : `/${item.toLowerCase()}`)} className={linkStyle}>
+                  <button key={item.id} onClick={() => handleNavClick(item.path)} className={linkStyle}>
                     {label}
                   </button>
                 );
               })}
             </nav>
 
-            {/* ACTION AREA (Button hidden on md/sm screens) */}
             <div className="flex items-center gap-3 md:gap-5 ml-auto lg:ml-0">
               {isCompact && <div className="hidden lg:block scale-100"><LanguageToggle /></div>}
 
-              {/* FIXED: Removed from md screens using 'hidden lg:flex' */}
               <button
-                onClick={() => navigate("/license")}
+                onClick={() => navigate(PATHS.LICENSE)}
                 className="hidden lg:flex bg-[#ff0000] text-white px-5 lg:px-8 py-3 rounded-sm font-black uppercase text-[11px] lg:text-[12px] tracking-widest shadow-xl hover:bg-[#0024f8] transition-all items-center gap-2 group shrink-0"
               >
                 <span className={isTamil ? "font-tamil" : ""}>{t.nav.joinUs}</span>
@@ -183,7 +208,7 @@ const Header = () => {
         </div>
       </header>
 
-      {/* --- MOBILE OVERLAY (Join Us remains here for mobile users) --- */}
+      {/* --- MOBILE OVERLAY --- */}
       {isMenuOpen && (
         <div className="fixed inset-0 z-[100] flex justify-end">
           <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setIsMenuOpen(false)}></div>
@@ -193,17 +218,17 @@ const Header = () => {
                <button onClick={() => setIsMenuOpen(false)}><X size={28} /></button>
              </div>
              <div className="flex flex-col p-6 gap-2 overflow-y-auto">
-                {navItems.map((item) => (
+                {NAV_ITEMS.map((item) => (
                    <button
-                     key={item}
-                     onClick={() => {navigate(item === 'Home' ? '/' : `/${item.toLowerCase()}`); setIsMenuOpen(false)}}
+                     key={item.id}
+                     onClick={() => handleNavClick(item.path)}
                      className={`text-xl font-black text-[#1a2b48] text-left border-b border-gray-50 py-4 ${isTamil ? 'font-tamil' : 'uppercase'}`}
                    >
-                     {t.nav[item === 'Our Team' ? 'Ourteam' : item.toLowerCase()]}
+                     {t.nav[item.transKey]}
                    </button>
                 ))}
                 <div className="mt-8 flex flex-col gap-4">
-                   <button onClick={() => navigate("/license")} className="w-full bg-[#1a2b48] text-white py-4 rounded-xl font-black text-xs uppercase">
+                   <button onClick={() => handleNavClick(PATHS.LICENSE)} className="w-full bg-[#1a2b48] text-white py-4 rounded-xl font-black text-xs uppercase">
                      {t.nav.joinUs}
                    </button>
                    <div className="flex justify-center mt-4"><LanguageToggle /></div>
