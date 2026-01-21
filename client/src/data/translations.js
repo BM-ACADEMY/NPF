@@ -75,8 +75,7 @@ export const translations = {
       aboutMenu: {
         background: "பின்னணி",
         vision: "நோக்கம் & தத்துவம்",
-        ideology: "அரசியல் கொள்கைகள்",
-        team: "தலைமை"
+        philosophy: "அரசியல் கொள்கைகள்",
       }
     },
     // Hero Section
