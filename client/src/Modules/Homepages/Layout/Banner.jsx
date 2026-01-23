@@ -107,17 +107,14 @@
 
 import React, { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-// Removed MessageSquareWarning since we deleted the complaint button
 
 // ✅ IMPORT YOUR BANNER IMAGES
 import BannerImg1 from "../../../assets/banner/Banner1.jpeg";
-// Add more if you have them, or use the same one for testing
 import BannerImg2 from "../../../assets/banner/Banner2.jpeg";
 
 const Banner = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  // ✅ DATA FOR CAROUSEL
   const slides = [
     {
       id: 1,
@@ -131,7 +128,7 @@ const Banner = () => {
     }
   ];
 
-  // ✅ Auto-Slide Logic (Every 6 seconds)
+  // ✅ Auto-Slide Logic
   useEffect(() => {
     const timer = setInterval(() => {
       nextSlide();
@@ -148,61 +145,79 @@ const Banner = () => {
   };
 
   return (
-    <section className="relative w-full bg-[#0F224A] overflow-hidden">
+    // Outer Section: Full Width
+    <section className="relative w-full bg-[#050505] overflow-hidden group">
 
-      {/* ✅ CONTAINER HEIGHT ADJUSTMENTS
-         - Mobile: h-[220px] (Small screens)
-         - Tablet: h-[400px] (Medium screens)
-         - Laptop: h-[600px] (Large screens)
-         - Desktop: h-[750px] (Extra large)
+      {/* ✅ HEIGHT CONTROLS
+         Adjust these values to change how tall the banner area is
       */}
-      <div className="relative w-full h-[220px] md:h-[400px] lg:h-[600px] xl:h-[750px] flex items-center bg-black">
+      <div className="relative w-full h-[250px] md:h-[450px] lg:h-[600px] xl:h-[700px]">
 
-        {/* --- LEFT ARROW --- */}
+        {/* --- NAVIGATION ARROWS --- */}
         <button
           onClick={prevSlide}
-          className="absolute left-2 md:left-6 z-20 w-8 h-8 md:w-12 md:h-12 flex items-center justify-center rounded-full bg-black/30 hover:bg-black/60 text-white transition-all hover:scale-110 backdrop-blur-sm"
+          className="absolute left-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 md:w-14 md:h-14 flex items-center justify-center rounded-full bg-black/20 hover:bg-black/60 text-white transition-all backdrop-blur-md border border-white/10 opacity-0 group-hover:opacity-100 duration-300"
         >
-          <ChevronLeft size={24} className="md:w-8 md:h-8" />
+          <ChevronLeft size={28} />
         </button>
 
-        {/* --- RIGHT ARROW --- */}
         <button
           onClick={nextSlide}
-          className="absolute right-2 md:right-6 z-20 w-8 h-8 md:w-12 md:h-12 flex items-center justify-center rounded-full bg-black/30 hover:bg-black/60 text-white transition-all hover:scale-110 backdrop-blur-sm"
+          className="absolute right-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 md:w-14 md:h-14 flex items-center justify-center rounded-full bg-black/20 hover:bg-black/60 text-white transition-all backdrop-blur-md border border-white/10 opacity-0 group-hover:opacity-100 duration-300"
         >
-          <ChevronRight size={24} className="md:w-8 md:h-8" />
+          <ChevronRight size={28} />
         </button>
 
-        {/* --- IMAGE SLIDER --- */}
+        {/* --- SLIDES --- */}
         {slides.map((slide, index) => (
           <div
             key={slide.id}
-            className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out ${
+            className={`absolute inset-0 w-full h-full transition-opacity duration-700 ease-in-out ${
               index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"
             }`}
           >
-            <img
-              src={slide.image}
-              alt={slide.alt}
-              // ✅ ALIGNMENT FIX:
-              // 'object-fill' forces the image to stretch to exact width/height (good for graphics with text)
-              // If the image looks "squashed", change this to 'object-cover'
-              className="w-full h-full object-fill"
-            />
+            {/* 1. BACKGROUND LAYER (Blurred)
+               - 'blur-3xl': Makes it very blurry
+               - 'scale-110': Zooms in slightly to hide blur edges
+               - 'brightness-50': Darkens it so the main banner pops
+            */}
+            <div className="absolute inset-0 w-full h-full overflow-hidden">
+                <img
+                    src={slide.image}
+                    alt=""
+                    className="w-full h-full object-cover blur-3xl scale-110 brightness-50 opacity-80"
+                />
+            </div>
+
+            {/* 2. MAIN CONTAINER LAYER (Sharp Image)
+               - 'container mx-auto': Centers the box
+               - 'object-contain': Ensures the whole banner is visible without cutting text
+            */}
+            <div className="relative z-20 w-full h-full flex items-center justify-center p-4 md:p-8">
+                <div className="relative w-full max-w-[1400px] h-full shadow-2xl rounded-xl overflow-hidden">
+                     <img
+                        src={slide.image}
+                        alt={slide.alt}
+                        className="w-full h-full object-fill md:object-contain"
+                        // Note: object-contain keeps aspect ratio (good for PC).
+                        // object-fill forces fit (good for Mobile if banner is designed for it).
+                     />
+                </div>
+            </div>
+
           </div>
         ))}
 
         {/* --- PAGINATION DOTS --- */}
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-30 flex gap-2">
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 flex gap-2">
           {slides.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentSlide(index)}
-              className={`h-1.5 md:h-2 rounded-full transition-all duration-300 shadow-sm ${
+              className={`h-1.5 md:h-2 rounded-full transition-all duration-300 shadow-md ${
                 currentSlide === index
-                  ? "w-6 md:w-8 bg-white"
-                  : "w-1.5 md:w-2 bg-white/50 hover:bg-white/80"
+                  ? "w-8 bg-white"
+                  : "w-2 bg-white/40 hover:bg-white/70"
               }`}
             />
           ))}

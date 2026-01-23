@@ -6,6 +6,11 @@ export const contactData = {
     title: "Contact",
     highlight: "Us",
     desc: "Have questions or want to connect? Reach out to us through the details below. We’d love to hear from you!",
+    // --- New Donation Content ---
+    donateTag: "Support Our Cause",
+    donateTitle: "Want to Donate?",
+    donateDesc: "To make a contribution or learn more about how you can help, please contact us directly at:",
+    // ----------------------------
     address: {
       title: "Headquarters",
       line1: "NO1, 2nd Cross, Pothigai Nagar, Nawarkulam,",
@@ -32,7 +37,12 @@ export const contactData = {
     tag: "தொடர்பு கொள்ள",
     title: "எங்களைத்",
     highlight: "தொடர்பு கொள்ளவும்",
-    desc: "கேள்விகள் உள்ளதா அல்லது எங்களோடு இணைய விரும்புகிறீர்களா? கீழே உள்ள விவரங்கள் மூலம் எங்களைத் தொடர்பு கொள்ளுங்கள். உங்களிடமிருந்து கேட்க நாங்கள் விரும்புகிறோம்!",
+    desc: "கேள்விகள் உள்ளதா அல்லது எங்களோடு இணைய விரும்புகிறீர்களா? கீழே உள்ள விவரங்கள் மூலம் எங்களைத் தொடர்பு கொள்ளுங்கள்.",
+    // --- New Donation Content ---
+    donateTag: "எங்கள் பணிக்கு ஆதரவளிக்கவும்",
+    donateTitle: "நன்கொடை அளிக்க வேண்டுமா?",
+    donateDesc: "நீங்கள் பங்களிக்க விரும்பினால் அல்லது எங்களைப் பற்றி மேலும் அறிய விரும்பினால், இந்த எண்ணில் எங்களைத் தொடர்பு கொள்ளவும்:",
+    // ----------------------------
     address: {
       title: "தலைமையகம்",
       line1: "எண் 1, 2வது குறுக்குத் தெரு, பொதிகை நகர், நாவற்குளம்,",

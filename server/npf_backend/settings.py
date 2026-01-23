@@ -200,18 +200,30 @@ else:
 
 
 CORS_ALLOWED_ORIGINS = [
+    # 🔹 Local development
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+
+    # 🔹 Production
     "https://npfindia.com",
     "https://www.npfindia.com",
     "https://npf.vercel.app",
     "https://npf-test.vercel.app",
 ]
 
+
 CSRF_TRUSTED_ORIGINS = [
+    # 🔹 Local development
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+
+    # 🔹 Production
     "https://npfindia.com",
     "https://www.npfindia.com",
     "https://npf.vercel.app",
     "https://npf-test.vercel.app",
 ]
+
 
 
 

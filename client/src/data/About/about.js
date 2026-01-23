@@ -2,7 +2,7 @@
 
 export const aboutData = {
   en: {
-    title: "About Us",
+    title: "ABOUT US",
 
     // 1. Background
     background: {

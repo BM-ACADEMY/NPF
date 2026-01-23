@@ -25,6 +25,7 @@ export const translations = {
         background: "Background",
         vision: "Vision",
         philosophy: "Political Philosophy",
+        ideology: "Political Ideology", // ✅ ADD THIS
       }
     },
     // Hero Section
@@ -76,6 +77,7 @@ export const translations = {
         background: "பின்னணி",
         vision: "நோக்கம் & தத்துவம்",
         philosophy: "அரசியல் கொள்கைகள்",
+        ideology: "அரசியல் சித்தாந்தம்", // ✅ ADD THIS
       }
     },
     // Hero Section
