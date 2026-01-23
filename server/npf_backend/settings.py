@@ -28,8 +28,10 @@ RENDER_EXTERNAL_HOSTNAME = os.getenv("RENDER_EXTERNAL_HOSTNAME")
 ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
-    "npf-backend-yi1p.onrender.com",
-    ".onrender.com",
+
+    "api.npfindia.com",
+    "npfindia.com",
+    "www.npfindia.com",
 ]
 
 
@@ -186,36 +188,30 @@ STATICFILES_DIRS = [
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 
-# MEDIA
-MEDIA_URL = "/media/"
-MEDIA_ROOT = BASE_DIR / "media"
+MEDIA_URL = "https://api.npfindia.com/media/"
+
+if DEBUG:
+    MEDIA_ROOT = BASE_DIR / "media"
+else:
+    MEDIA_ROOT = "/var/www/npf_media"
 
 
 
 
-# -------------------se----------
-# CORS
-# -----------------------------
-# CORS_ALLOWED_ORIGINS = [
-#     "https://npf.com",
-#     "https://www.npf.com",
-# ]
+
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",
-    "http://127.0.0.1:5173",
-    "https://npf.vercel.app",   # frontend
-    "https://npf-test.vercel.app",
-
-]
-
-
-
-CSRF_TRUSTED_ORIGINS = [
+    "https://npfindia.com",
+    "https://www.npfindia.com",
     "https://npf.vercel.app",
     "https://npf-test.vercel.app",
 ]
 
-
+CSRF_TRUSTED_ORIGINS = [
+    "https://npfindia.com",
+    "https://www.npfindia.com",
+    "https://npf.vercel.app",
+    "https://npf-test.vercel.app",
+]
 
 
 
