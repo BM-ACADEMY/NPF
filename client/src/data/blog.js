@@ -3,7 +3,7 @@
 export const blogData = {
   en: {
     tag: "Latest Updates",
-    title: "Political",
+    title: "Events",
     highlight: "Insights",
     titleSuffix: "& Blogs",
     desc: "Discover thoughts, insights, and stories shaping our political vision and social change.",
@@ -17,7 +17,7 @@ export const blogData = {
   },
   ta: {
     tag: "சமீபத்திய செய்திகள்",
-    title: "அரசியல்",
+    title: "நிகழ்வுகள்",
     highlight: "பார்வைகள்",
     titleSuffix: "& வலைப்பதிவுகள்",
     desc: "எமது அரசியல் பார்வை மற்றும் சமூக மாற்றத்தை உருவாக்கும் சிந்தனைகள் மற்றும் கதைகளைக் கண்டறியுங்கள்.",

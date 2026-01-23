@@ -15,10 +15,11 @@ const HomepagesRoutes = () => {
       <Banner />
       {/* <Bar /> */}
       <Hero />
+      <BlogHome />
       <Home />
       <StatsSection />
       <SocialMediaLinks />
-      <BlogHome />
+      <Home />
       <LicenseDownload />
     </>
   );
