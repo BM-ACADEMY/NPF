@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Menu, X, ChevronDown, ArrowRight, Download } from "lucide-react";
-import Logo from "../../../assets/npf-logo.jpeg";
+import Logo from "../../../assets/dmmlogo.jpeg";
 import { useLanguage } from "../../../context/LanguageContext";
 import LanguageToggle from "../../language/LanguageToggle";
 

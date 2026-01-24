@@ -3,7 +3,7 @@ import axios from "axios";
 import { toast, ToastContainer, Slide } from "react-toastify";
 import { FaDownload, FaCheckCircle, FaExclamationCircle, FaShieldAlt } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
-import logo from "../../../assets/npf-logo.jpeg";
+import logo from "../../../assets/dmmlogo.jpeg";
 import "react-toastify/dist/ReactToastify.css";
 
 // ✅ 1. Import Context and Data

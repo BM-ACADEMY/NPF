@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import axios from "axios";
 import { toast, ToastContainer, Slide } from "react-toastify";
-import logo from "../../../assets/npf-logo.jpeg";
+import logo from "../../../assets/dmmlogo.jpeg";
 import { FaUser, FaPhoneAlt, FaIdCard, FaMapMarkerAlt, FaUpload, FaCheckCircle, FaTimesCircle, FaIdBadge } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import "react-toastify/dist/ReactToastify.css";
