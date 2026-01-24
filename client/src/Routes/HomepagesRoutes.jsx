@@ -16,7 +16,6 @@ const HomepagesRoutes = () => {
       {/* <Bar /> */}
       <Hero />
       <BlogHome />
-      <Home />
       <StatsSection />
       <SocialMediaLinks />
       <Home />
