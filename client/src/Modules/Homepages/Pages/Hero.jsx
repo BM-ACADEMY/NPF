@@ -18,16 +18,16 @@ const Hero = () => {
           @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
           @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;500;600;700;800;900&display=swap');
 
-          .font-npf-reference { font-family: 'Inter', sans-serif; }
+          .font-dmm-reference { font-family: 'Inter', sans-serif; }
           .font-tamil { font-family: 'Noto Sans Tamil', sans-serif; }
 
-          .npf-blue-text { color: #0024f8; display: inline-block; }
-          .npf-navy-text { color: #1a2b48; }
-          .npf-gold-text { color: #ffeb00; }
+          .dmm-blue-text { color: #0024f8; display: inline-block; }
+          .dmm-navy-text { color: #1a2b48; }
+          .dmm-gold-text { color: #ffeb00; }
         `}
       </style>
 
-      <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-16 py-12 md:py-20 relative z-10 font-npf-reference">
+      <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-16 py-12 md:py-20 relative z-10 font-dmm-reference">
         <div className="flex flex-col-reverse lg:flex-row items-center gap-10 lg:gap-16">
 
           {/* === LEFT: TEXT CONTENT === */}
@@ -36,20 +36,20 @@ const Hero = () => {
             {/* Pill Badge */}
             <div className="inline-flex items-center gap-2 py-1.5 px-3 rounded-full bg-blue-50 border border-blue-100 mb-6">
               <span className="w-2 h-2 rounded-full bg-[red]"></span>
-              <span className={`npf-navy-text text-[10px] md:text-xs font-black tracking-[0.2em] ${isTamil ? 'font-tamil' : 'uppercase'}`}>
+              <span className={`dmm-navy-text text-[10px] md:text-xs font-black tracking-[0.2em] ${isTamil ? 'font-tamil' : 'uppercase'}`}>
                 {isTamil ? "அரசியல் கட்சி" : "National Political Front"}
               </span>
             </div>
 
             {/* ✅ 1. SINGLE STATIC MAIN TITLE */}
             <h1
-              className={`font-black npf-blue-text mb-6 ${
+              className={`font-black dmm-blue-text mb-6 ${
                 isTamil
                   ? "font-tamil text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-tight"
                   : "text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tighter"
               }`}
             >
-              {isTamil ? "தேசிய மக்கள் முன்னணி (NPF)" : "National People’s Front (NPF)"}
+              {isTamil ? "தேசிய மக்கள் முன்னணி (dmm)" : "National People’s Front (dmm)"}
             </h1>
 
             {/* ✅ 2. LOOP: Renders other items as Subheadings & Text */}
@@ -58,7 +58,7 @@ const Hero = () => {
                 <div key={index} className="flex flex-col gap-2">
 
                   {/* Item Title: Now a smaller subheading (h3) instead of h1 */}
-                  <h3 className={`font-bold npf-navy-text ${
+                  <h3 className={`font-bold dmm-navy-text ${
                     isTamil ? "font-tamil text-xl" : "text-xl md:text-2xl"
                   }`}>
                     {item.title}
@@ -66,7 +66,7 @@ const Hero = () => {
 
                   {/* Item Description: Standard text */}
                   <p
-                    className={`npf-navy-text opacity-90 max-w-xl mx-auto lg:mx-0 ${
+                    className={`dmm-navy-text opacity-90 max-w-xl mx-auto lg:mx-0 ${
                       isTamil
                         ? "font-tamil text-base leading-relaxed"
                         : "text-base leading-relaxed font-medium"

@@ -29,11 +29,11 @@ const OurTeam = () => {
   };
 
   return (
-    <div className="w-full bg-[#f4f4f4] font-npf-reference min-h-screen relative overflow-hidden">
+    <div className="w-full bg-[#f4f4f4] font-dmm-reference min-h-screen relative overflow-hidden">
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;600;700;900&display=swap');
-        .font-npf-reference { font-family: 'Inter', sans-serif; }
+        .font-dmm-reference { font-family: 'Inter', sans-serif; }
         .font-tamil { font-family: 'Noto Sans Tamil', sans-serif; }
 
         .perspective-1000 { perspective: 1000px; }

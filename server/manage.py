@@ -8,11 +8,11 @@ from dotenv import load_dotenv
 def main():
     """Run administrative tasks."""
     # --- Load environment variables first ---
-    BASE_DIR = Path(__file__).resolve().parent / "npf_backend"
+    BASE_DIR = Path(__file__).resolve().parent / "dmm_backend"
     load_dotenv(BASE_DIR / ".env")
     load_dotenv(BASE_DIR / ".env.local", override=True)
 
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'npf_backend.settings')
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'dmm_backend.settings')
 
     try:
         from django.core.management import execute_from_command_line

@@ -36,7 +36,7 @@ export default function MembershipDownload() {
   const t = downloadData[language] || downloadData['en'];
   const isTamil = language === 'ta';
 
-  const API_URL = `${import.meta.env.VITE_API_BASE_URL}/npf/download/`;
+  const API_URL = `${import.meta.env.VITE_API_BASE_URL}/dmm/download/`;
 
   const simulateProgress = () => {
     let current = 0;
@@ -108,10 +108,10 @@ export default function MembershipDownload() {
           @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&display=swap');
           @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;700;900&display=swap');
 
-          .font-npf-reference { font-family: 'Inter', sans-serif; }
+          .font-dmm-reference { font-family: 'Inter', sans-serif; }
           .font-tamil { font-family: 'Noto Sans Tamil', sans-serif; }
 
-          .npf-blue-text {
+          .dmm-blue-text {
             color: #0024f8;
           }
         `}
@@ -127,7 +127,7 @@ export default function MembershipDownload() {
         initial={{ opacity: 0, scale: 0.98 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.4 }}
-        className="relative z-10 max-w-lg w-full mx-4 font-npf-reference"
+        className="relative z-10 max-w-lg w-full mx-4 font-dmm-reference"
       >
         <div className="bg-white rounded-2xl shadow-2xl overflow-hidden border border-slate-200/50">
 
@@ -245,7 +245,7 @@ export default function MembershipDownload() {
 
             <div className="bg-[#f0f0f0]/50 p-5 text-center border-t border-slate-100">
                  <p className={`text-[11px] text-[#1a2b48] font-black uppercase tracking-[0.2em] opacity-40 ${isTamil ? 'font-tamil' : ''}`}>
-                    {t.footer || "Official NPF Portal"}
+                    {t.footer || "Official dmm Portal"}
                  </p>
             </div>
         </div>

@@ -81,11 +81,11 @@ const About = () => {
   }, [location]);
 
   return (
-    <div className="w-full bg-white font-npf-reference pb-20">
+    <div className="w-full bg-white font-dmm-reference pb-20">
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;500;600;700;900&display=swap');
-        .font-npf-reference { font-family: 'Inter', sans-serif; }
+        .font-dmm-reference { font-family: 'Inter', sans-serif; }
         .font-tamil { font-family: 'Noto Sans Tamil', sans-serif; }
 
         @keyframes fadeIn {

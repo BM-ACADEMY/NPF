@@ -1,10 +1,10 @@
 @import "tailwindcss";
 
 @theme {
-  /* NPF Brand Colors */
-  --color-npf-blue: #0024f8;
-  --color-npf-red: #ff0000;
-  --color-npf-yellow: #ffff00;
+  /* dmm Brand Colors */
+  --color-dmm-blue: #0024f8;
+  --color-dmm-red: #ff0000;
+  --color-dmm-yellow: #ffff00;
 
   /* Your existing theme */
   --color-navy: #1a2b48;
@@ -14,7 +14,7 @@
 }
 
 /* Custom utility for the Tri-Color Text effect */
-@utility npf-gradient-text {
+@utility dmm-gradient-text {
   background: linear-gradient(
     to bottom,
     #0024f8 0%, #0024f8 35%,   /* Blue Top */

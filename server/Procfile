@@ -1,1 +1,1 @@
-web: gunicorn npf_backend.wsgi:application
+web: gunicorn dmm_backend.wsgi:application

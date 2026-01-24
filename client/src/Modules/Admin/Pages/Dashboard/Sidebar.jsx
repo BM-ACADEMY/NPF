@@ -66,7 +66,7 @@ const Sidebar = () => {
             </div>
             <div>
               <h2 className="text-lg font-black tracking-tight text-white leading-none">
-                npf
+                dmm
               </h2>
               <p className="text-xs text-gray-500 font-bold tracking-widest uppercase mt-1">
                 Admin Console

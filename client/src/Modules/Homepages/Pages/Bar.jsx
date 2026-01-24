@@ -3,7 +3,7 @@ import React, { useState } from "react";
 const Bar = () => {
   const [activeTab, setActiveTab] = useState("about");
 
-  // NPF Color Palette:
+  // dmm Color Palette:
   // Primary Blue: #001AFF
   // Primary Red: #FF0000
   // Accent Yellow: #FFFF00
@@ -70,7 +70,7 @@ const Bar = () => {
                     group relative h-[160px] md:h-[200px] flex flex-col items-center justify-center cursor-pointer transition-all duration-300
                     ${/* Vertical Divider Lines */
                       !isActive && index !== tabs.length - 1 ? "border-r border-white/10" : ""}
-                    ${/* ✅ Active: NPF BLUE BG + RED Border | Inactive: Black */
+                    ${/* ✅ Active: dmm BLUE BG + RED Border | Inactive: Black */
                       isActive
                         ? "bg-[#001AFF] shadow-[0_0_30px_rgba(0,26,255,0.4)] scale-[1.05] z-10 rounded-b-lg border-b-8 border-[#FF0000]"
                         : "bg-black hover:bg-gray-900"

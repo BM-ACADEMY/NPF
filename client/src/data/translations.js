@@ -33,7 +33,7 @@ export const translations = {
       {
         title: "Student rights and growth are our aim",
         highlight: "aim",
-        desc: "Unity is the path to progress. NPF is a powerful voice for social change and political awareness among the younger generation.",
+        desc: "Unity is the path to progress. dmm is a powerful voice for social change and political awareness among the younger generation.",
       },
       {
         title: "The future of the next generation is in our hands",
@@ -48,7 +48,7 @@ export const translations = {
     ],
     // Buttons
     buttons: {
-      join: "JOIN NPF",
+      join: "JOIN dmm",
       about: "About Us",
     }
   },
@@ -85,7 +85,7 @@ export const translations = {
       {
         title: "மாணவர்களின் உரிமையும் வளர்ச்சியும் எங்கள் நோக்கம்",
         highlight: "நோக்கம்",
-        desc: "மாணவர்கள் ஒன்றிணைவதே முன்னேற்றத்தின் பாதை. npf தளம் சமூக மாற்றத்திற்கும் இளைய தலைமுறையின் அரசியல் விழிப்புணர்விற்கும் ஒரு சக்திவாய்ந்த குரல் ஆகும்.",
+        desc: "மாணவர்கள் ஒன்றிணைவதே முன்னேற்றத்தின் பாதை. dmm தளம் சமூக மாற்றத்திற்கும் இளைய தலைமுறையின் அரசியல் விழிப்புணர்விற்கும் ஒரு சக்திவாய்ந்த குரல் ஆகும்.",
       },
       {
         title: "இளைய தலைமுறையின் எதிர்காலம் எங்கள் கையில்",

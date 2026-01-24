@@ -83,12 +83,12 @@ const BlogHome = () => {
         {`
           @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&display=swap');
           @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;700;900&display=swap');
-          .font-npf-reference { font-family: 'Inter', sans-serif; }
+          .font-dmm-reference { font-family: 'Inter', sans-serif; }
           .font-tamil { font-family: 'Noto Sans Tamil', sans-serif; }
         `}
       </style>
 
-      <div className="relative max-w-7xl mx-auto px-6 md:px-12 z-10 font-npf-reference">
+      <div className="relative max-w-7xl mx-auto px-6 md:px-12 z-10 font-dmm-reference">
 
         {/* --- Header Section from Reference --- */}
         <div className="flex flex-col items-start mb-16">

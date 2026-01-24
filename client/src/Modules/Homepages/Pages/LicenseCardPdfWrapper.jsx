@@ -11,8 +11,8 @@ export default function LicenseCardPdfWrapper() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Fetch individual member record for NPF project
-    API.get(`/npf/${id}/`)
+    // Fetch individual member record for dmm project
+    API.get(`/dmm/${id}/`)
       .then((res) => {
         setLicense(res.data);
         setLoading(false);
@@ -30,7 +30,7 @@ export default function LicenseCardPdfWrapper() {
       <div className="min-h-screen flex items-center justify-center bg-slate-50">
         <div className="flex flex-col items-center gap-4">
           <div className="w-10 h-10 border-4 border-[#0024f8] border-t-transparent rounded-full animate-spin"></div>
-          <p className="text-[#1a2b48] font-bold uppercase tracking-widest text-xs">Loading NPF Member Details...</p>
+          <p className="text-[#1a2b48] font-bold uppercase tracking-widest text-xs">Loading dmm Member Details...</p>
         </div>
       </div>
     );

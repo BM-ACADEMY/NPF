@@ -75,7 +75,7 @@ const Header = () => {
         {`
           @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&display=swap');
           @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;700;900&display=swap');
-          .font-npf-reference { font-family: 'Inter', sans-serif; }
+          .font-dmm-reference { font-family: 'Inter', sans-serif; }
           .font-tamil { font-family: 'Noto Sans Tamil', sans-serif; }
         `}
       </style>
@@ -103,7 +103,7 @@ const Header = () => {
             className="flex items-center gap-3 shrink-0 z-50"
           >
             <div className="w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 overflow-hidden rounded-full border-2 border-gray-100 shadow-sm">
-              <img src={Logo} alt="NPF Logo" className="w-full h-full object-cover" />
+              <img src={Logo} alt="dmm Logo" className="w-full h-full object-cover" />
             </div>
 
             <div className="flex flex-col">

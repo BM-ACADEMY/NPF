@@ -57,16 +57,16 @@ const HomeGallery = () => {
           @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&display=swap');
           @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;700;900&display=swap');
 
-          .font-npf-reference { font-family: 'Inter', sans-serif; }
+          .font-dmm-reference { font-family: 'Inter', sans-serif; }
           .font-tamil { font-family: 'Noto Sans Tamil', sans-serif; }
 
           /* Colors restored to your previous specification */
-          .npf-blue-text { color: #0024f8; }
-          .npf-brand-red { color: #ff0000; }
+          .dmm-blue-text { color: #0024f8; }
+          .dmm-brand-red { color: #ff0000; }
         `}
       </style>
 
-      <div className="container mx-auto px-4 relative z-10 font-npf-reference">
+      <div className="container mx-auto px-4 relative z-10 font-dmm-reference">
         {/* --- Header Section --- */}
         <div className="flex flex-col items-center text-center mb-16">
           {/* RESTORED: Red Color */}

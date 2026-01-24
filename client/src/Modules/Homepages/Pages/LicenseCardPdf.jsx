@@ -44,7 +44,7 @@ const downloadPdf = async () => {
     });
 
     pdf.addImage(imgData, "JPEG", 0, 0, 340, 520);
-    pdf.save(`npf_${safeName}.pdf`);
+    pdf.save(`dmm_${safeName}.pdf`);
   } catch (err) {
     console.error(err);
     toast.error("PDF generation failed");
@@ -69,9 +69,9 @@ const approveAndUpload = async () => {
 
     const pdfBlob = pdf.output("blob");
     const formData = new FormData();
-    formData.append("pdf_file", pdfBlob, `npf_${safeName}.pdf`);
+    formData.append("pdf_file", pdfBlob, `dmm_${safeName}.pdf`);
 
-    const res = await API.post(`/npf/${license._id}/upload_pdf/`, formData, {
+    const res = await API.post(`/dmm/${license._id}/upload_pdf/`, formData, {
       headers: { "Content-Type": "multipart/form-data" }
     });
 
@@ -93,14 +93,14 @@ const approveAndUpload = async () => {
       <style>
         {`
           @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
-          .npf-card-render { font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
+          .dmm-card-render { font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
         `}
       </style>
 
       {/* --- STABLE PDF CONTAINER --- */}
       <div
         ref={cardRef}
-        className="npf-card-render"
+        className="dmm-card-render"
         style={{
           width: 340,
           height: 520,
@@ -122,7 +122,7 @@ const approveAndUpload = async () => {
           <div style={{ display: "flex", alignItems: "center" }}>
             <img src={logo} crossOrigin="anonymous" style={{ width: 44, height: 44, borderRadius: "50%", marginRight: 10 }} alt="logo" />
             <div>
-              <h1 style={{ margin: 0, fontSize: 16, fontWeight: 900, color: "#1a2b48", textTransform: "uppercase" }}>NPF</h1>
+              <h1 style={{ margin: 0, fontSize: 16, fontWeight: 900, color: "#1a2b48", textTransform: "uppercase" }}>dmm</h1>
               <p style={{ margin: 0, fontSize: 7, fontWeight: 700, color: "#0024f8", textTransform: "uppercase", letterSpacing: "0.5px" }}>National People's Front</p>
             </div>
           </div>

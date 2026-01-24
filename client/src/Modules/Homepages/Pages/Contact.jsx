@@ -25,12 +25,12 @@ const Contact = () => {
   const isTamil = language === 'ta';
 
   return (
-    <section className="relative w-full bg-[#f0f0f0] py-20 md:py-28 overflow-hidden font-npf-reference">
+    <section className="relative w-full bg-[#f0f0f0] py-20 md:py-28 overflow-hidden font-dmm-reference">
       <style>
         {`
           @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&display=swap');
           @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;700;900&display=swap');
-          .font-npf-reference { font-family: 'Inter', sans-serif; }
+          .font-dmm-reference { font-family: 'Inter', sans-serif; }
           .font-tamil { font-family: 'Noto Sans Tamil', sans-serif; }
         `}
       </style>
@@ -150,7 +150,7 @@ const Contact = () => {
               allowFullScreen=""
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              title="NPF Location"
+              title="dmm Location"
               className="grayscale-[0.8] group-hover:grayscale-0 transition-all duration-1000"
             ></iframe>
             <div className="absolute top-8 right-8 bg-white/95 backdrop-blur-md px-5 py-3 rounded-xl shadow-xl border-l-4 border-[#0024f8]">

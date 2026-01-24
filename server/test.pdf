@@ -32,7 +32,7 @@
       </tr>
       <tr>
         <th>Request URL:</th>
-        <td>https://npf.com/api/download_license?phone=9182706522</td>
+        <td>https://dmm.com/api/download_license?phone=9182706522</td>
       </tr>
 
     </table>
@@ -40,7 +40,7 @@
   <div id="info">
 
       <p>
-      Using the URLconf defined in <code>npf_backend.urls</code>,
+      Using the URLconf defined in <code>dmm_backend.urls</code>,
       Django tried these URL patterns, in this order:
       </p>
       <ol>

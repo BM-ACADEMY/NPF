@@ -1,4 +1,4 @@
-// C:\Users\ADMIN\Desktop\Project\npf\client\src\Modules\Admin\Auth\Login.jsx
+// C:\Users\ADMIN\Desktop\Project\dmm\client\src\Modules\Admin\Auth\Login.jsx
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -53,12 +53,12 @@ export default function Login() {
           <div className="bg-white/10 backdrop-blur-md p-6 rounded-full inline-block mb-8 shadow-2xl border border-white/10">
             <img
               src={Logo}
-              alt="npf Logo"
+              alt="dmm Logo"
               className="w-24 h-24 object-contain rounded-full"
             />
           </div>
           <h1 className="text-4xl font-black tracking-tight mb-4">
-            npf <span className="text-[#3b82f6]">Admin</span>
+            dmm <span className="text-[#3b82f6]">Admin</span>
           </h1>
           <p className="text-lg text-gray-400 max-w-md mx-auto leading-relaxed">
             Welcome to the official administration portal. Manage members, update content, and oversee operations securely.
@@ -77,7 +77,7 @@ export default function Login() {
         {/* Mobile Header (Only shows on mobile) */}
         <div className="lg:hidden absolute top-8 left-8 flex items-center gap-3">
            <img src={Logo} alt="Logo" className="w-10 h-10" />
-           <span className="font-bold text-slate-900">npf Admin</span>
+           <span className="font-bold text-slate-900">dmm Admin</span>
         </div>
 
         <div className="w-full max-w-md space-y-8">
@@ -109,7 +109,7 @@ export default function Login() {
                   onChange={(e) => setEmail(e.target.value)}
                   required
                   className="w-full pl-10 pr-4 py-3.5 border-2 border-gray-200 rounded-xl focus:border-[#0056b3] focus:ring-4 focus:ring-blue-500/10 transition-all outline-none font-medium text-slate-800 bg-gray-50 focus:bg-white"
-                  placeholder="admin@npf.org"
+                  placeholder="admin@dmm.org"
                 />
               </div>
             </div>
@@ -150,7 +150,7 @@ export default function Login() {
           </form>
 
           <p className="text-center text-xs text-gray-400 mt-8">
-            &copy; {new Date().getFullYear()} npf. Secure Server.
+            &copy; {new Date().getFullYear()} dmm. Secure Server.
           </p>
         </div>
       </div>

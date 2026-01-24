@@ -17,7 +17,7 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function LicenseAdmin() {
-  const API_URL = `/npf/`;
+  const API_URL = `/dmm/`;
 
   const [licenses, setLicenses] = useState([]);
   const [filteredLicenses, setFilteredLicenses] = useState([]);
@@ -65,7 +65,7 @@ export default function LicenseAdmin() {
 
   /* -------- Actions -------- */
   const handleApprove = (license) => {
-    window.location.href = `/#/admin/npf/pdf/${license._id}`;
+    window.location.href = `/#/admin/dmm/pdf/${license._id}`;
   };
 
   const confirmDelete = (license) => setDeleteTarget(license);

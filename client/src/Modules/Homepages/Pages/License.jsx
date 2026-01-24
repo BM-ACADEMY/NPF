@@ -48,7 +48,7 @@ export default function License() {
     }
     setChecking(true);
     try {
-      const res = await axios.get(`${API_BASE_URL}/npf/check_phone/`, { params: { phone: number } });
+      const res = await axios.get(`${API_BASE_URL}/dmm/check_phone/`, { params: { phone: number } });
       if (res.data.available) {
         setPhoneAvailable(true);
         setPhoneMessage(t.messages.phoneAvailable);
@@ -112,7 +112,7 @@ export default function License() {
     const data = new FormData();
     Object.entries(formData).forEach(([k, v]) => data.append(k, v ?? ""));
     try {
-      await axios.post(`${API_BASE_URL}/npf/`, data, { headers: { "Content-Type": "multipart/form-data" } });
+      await axios.post(`${API_BASE_URL}/dmm/`, data, { headers: { "Content-Type": "multipart/form-data" } });
       toast.success(t.messages.success);
       setFormData({ name: "", aadhar_number: "", phone: "", address: "", photo: null });
       if (previewUrl) URL.revokeObjectURL(previewUrl);
@@ -127,12 +127,12 @@ export default function License() {
   };
 
   return (
-    <div className="min-h-screen py-12 md:py-20 px-4 bg-[#f8fafc] relative overflow-hidden font-npf-reference">
+    <div className="min-h-screen py-12 md:py-20 px-4 bg-[#f8fafc] relative overflow-hidden font-dmm-reference">
       <ToastContainer position="top-right" transition={Slide} />
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;700;900&display=swap');
-        .font-npf-reference { font-family: 'Inter', sans-serif; }
+        .font-dmm-reference { font-family: 'Inter', sans-serif; }
         .font-tamil { font-family: 'Noto Sans Tamil', sans-serif; }
       `}</style>
 
@@ -151,7 +151,7 @@ export default function License() {
           <div className="p-8 md:p-12">
             <div className="flex items-center gap-6 mb-12">
               <div className="w-16 h-16 md:w-20 md:h-20 rounded-full border-4 border-slate-50 shadow-md overflow-hidden shrink-0">
-                <img src={logo} alt="NPF Logo" className="w-full h-full object-cover" />
+                <img src={logo} alt="dmm Logo" className="w-full h-full object-cover" />
               </div>
               <div>
                 <h1 className={`text-2xl md:text-4xl font-black text-[#1a2b48] leading-tight ${isTamil ? 'font-tamil' : 'uppercase tracking-tighter'}`}>
@@ -269,10 +269,10 @@ export default function License() {
              <div className="bg-white rounded-lg shadow-inner overflow-hidden border border-slate-200">
                 <div className="bg-slate-50 p-4 flex items-center gap-3 border-b border-slate-100">
                    <div className="w-10 h-10 rounded-full bg-white border border-slate-200 p-0.5 overflow-hidden shadow-sm">
-                      <img src={logo} alt="NPF" className="w-full h-full object-cover" />
+                      <img src={logo} alt="dmm" className="w-full h-full object-cover" />
                    </div>
                    <div className="flex-1">
-                      <h4 className="text-[10px] font-black text-[#1a2b48] leading-none uppercase">NPF Membership</h4>
+                      <h4 className="text-[10px] font-black text-[#1a2b48] leading-none uppercase">dmm Membership</h4>
                       <p className="text-[7px] text-[#0024f8] font-bold uppercase tracking-widest mt-0.5">National People's Front</p>
                    </div>
                    <FaIdBadge className="text-[#1a2b48]/10 text-3xl" />

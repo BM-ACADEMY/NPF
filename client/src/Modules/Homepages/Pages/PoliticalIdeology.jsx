@@ -36,14 +36,14 @@ const PoliticalIdeology = () => {
     /* Section Background updated to #f0f0f0 */
     <section
       id="ideology"
-      className="relative w-full bg-[#f0f0f0] py-24 scroll-mt-20 overflow-hidden font-npf-reference"
+      className="relative w-full bg-[#f0f0f0] py-24 scroll-mt-20 overflow-hidden font-dmm-reference"
     >
       <style>
         {`
           @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&display=swap');
           @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;700;900&display=swap');
 
-          .font-npf-reference { font-family: 'Inter', sans-serif; }
+          .font-dmm-reference { font-family: 'Inter', sans-serif; }
           .font-tamil { font-family: 'Noto Sans Tamil', sans-serif; }
         `}
       </style>

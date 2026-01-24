@@ -132,7 +132,7 @@ const AppRoutes = () => {
           {/* ---------- Admin ---------- */}
           <Route path="/admin/*" element={<AdminRoutes />} />
           <Route
-            path="/admin/npf/pdf/:id"
+            path="/admin/dmm/pdf/:id"
             element={<LicenseCardPdfWrapper />}
           />
 
