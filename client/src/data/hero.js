@@ -2,10 +2,10 @@ export const heroData = {
   en: [
     {
       id: 1,
-      title: "National People’s Front (dmm)",
+      title: "Desiya Makkal Munnani (DMM)",
       highlight: "dmm",
       desc:
-        "The National People’s Front (dmm), also known as Desiya Makkal Munnani, is a national political party committed to upholding the values of justice, democracy, dignity, and equality as enshrined in the Constitution of India."
+        "The National People’s Front (DMM), also known as Desiya Makkal Munnani, is a national political party committed to upholding the values of justice, democracy, dignity, and equality as enshrined in the Constitution of India."
     },
     {
       id: 2,
@@ -26,10 +26,10 @@ export const heroData = {
   ta: [
     {
       id: 1,
-      title: "தேசிய மக்கள் முன்னணி (dmm)",
+      title: "தேசிய மக்கள் முன்னணி (DMM)",
       highlight: "தேசிய",
       desc:
-        "தேசிய மக்கள் முன்னணி (dmm), இந்திய அரசியலமைப்பில் உறுதிப்படுத்தப்பட்டுள்ள நீதி, ஜனநாயகம், மனித மரியாதை மற்றும் சமத்துவம் ஆகிய அடிப்படை மதிப்புகளை நிலைநிறுத்துவதற்காக செயல்படும் ஒரு தேசிய அரசியல் கட்சியாகும்."
+        "தேசிய மக்கள் முன்னணி (DMM), இந்திய அரசியலமைப்பில் உறுதிப்படுத்தப்பட்டுள்ள நீதி, ஜனநாயகம், மனித மரியாதை மற்றும் சமத்துவம் ஆகிய அடிப்படை மதிப்புகளை நிலைநிறுத்துவதற்காக செயல்படும் ஒரு தேசிய அரசியல் கட்சியாகும்."
     },
     {
       id: 2,

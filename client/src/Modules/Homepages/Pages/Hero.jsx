@@ -37,7 +37,7 @@ const Hero = () => {
             <div className="inline-flex items-center gap-2 py-1.5 px-3 rounded-full bg-blue-50 border border-blue-100 mb-6">
               <span className="w-2 h-2 rounded-full bg-[red]"></span>
               <span className={`dmm-navy-text text-[10px] md:text-xs font-black tracking-[0.2em] ${isTamil ? 'font-tamil' : 'uppercase'}`}>
-                {isTamil ? "அரசியல் கட்சி" : "National Political Front"}
+                {isTamil ? "அரசியல் கட்சி" : "National Poeple Front"}
               </span>
             </div>
 
@@ -49,7 +49,7 @@ const Hero = () => {
                   : "text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tighter"
               }`}
             >
-              {isTamil ? "தேசிய மக்கள் முன்னணி (dmm)" : "National People’s Front (dmm)"}
+              {isTamil ? "தேசிய மக்கள் முன்னணி (DMM)" : "National People’s Front (DMM)"}
             </h1>
 
             {/* ✅ 2. LOOP: Renders other items as Subheadings & Text */}

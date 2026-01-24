@@ -109,7 +109,7 @@ import React, { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 // ✅ IMPORT YOUR BANNER IMAGES
-import BannerImg1 from "../../../assets/banner/Banner1.jpeg";
+import BannerImg1 from "../../../assets/banner/dmmbanner1.jpeg";
 import BannerImg2 from "../../../assets/banner/Banner2.jpeg";
 
 const Banner = () => {

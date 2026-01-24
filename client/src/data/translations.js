@@ -17,7 +17,7 @@ export const translations = {
       contact: "Contact",
       downloadId: "Download ID",
       joinUs: "Join Us",
-      menuTitle: "National People's Front",
+      menuTitle: "Desiya Makkal Munnani",
       menuSubtitle: "Visionary Leader",
 
       // ✅ ADDED THIS FOR DROPDOWN
