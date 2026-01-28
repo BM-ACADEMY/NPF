@@ -124,12 +124,12 @@ const Banner = () => {
     },
     {
       id: 2,
-      image: BannerImg2,
+      image: BannerImg3,
       alt: "National People's Front Banner 2",
     }, // <--- FIXED: Added missing comma here
     {
       id: 3,
-      image: BannerImg3, // <--- FIXED: Added missing comma here
+      image: BannerImg2, // <--- FIXED: Added missing comma here
       alt: "National People's Front Banner 3",
     },
   ];
