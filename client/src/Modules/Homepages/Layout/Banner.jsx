@@ -110,7 +110,8 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 
 // ✅ IMPORT YOUR BANNER IMAGES
 import BannerImg1 from "../../../assets/banner/dmmbanner1.jpeg";
-import BannerImg2 from "../../../assets/banner/Banner2.jpeg";
+import BannerImg2 from "../../../assets/banner/dmmbanner2.jpeg";
+import BannerImg3 from "../../../assets/banner/dmmbanner3.jpeg";
 
 const Banner = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -119,13 +120,18 @@ const Banner = () => {
     {
       id: 1,
       image: BannerImg1,
-      alt: "National People's Front Banner 1"
+      alt: "National People's Front Banner 1",
     },
     {
       id: 2,
       image: BannerImg2,
-      alt: "National People's Front Banner 2"
-    }
+      alt: "National People's Front Banner 2",
+    }, // <--- FIXED: Added missing comma here
+    {
+      id: 3,
+      image: BannerImg3, // <--- FIXED: Added missing comma here
+      alt: "National People's Front Banner 3",
+    },
   ];
 
   // ✅ Auto-Slide Logic
@@ -147,12 +153,10 @@ const Banner = () => {
   return (
     // Outer Section: Full Width
     <section className="relative w-full bg-[#050505] overflow-hidden group">
-
       {/* ✅ HEIGHT CONTROLS
-         Adjust these values to change how tall the banner area is
+          Adjust these values to change how tall the banner area is
       */}
       <div className="relative w-full h-[250px] md:h-[450px] lg:h-[600px] xl:h-[700px]">
-
         {/* --- NAVIGATION ARROWS --- */}
         <button
           onClick={prevSlide}
@@ -176,35 +180,25 @@ const Banner = () => {
               index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"
             }`}
           >
-            {/* 1. BACKGROUND LAYER (Blurred)
-               - 'blur-3xl': Makes it very blurry
-               - 'scale-110': Zooms in slightly to hide blur edges
-               - 'brightness-50': Darkens it so the main banner pops
-            */}
+            {/* 1. BACKGROUND LAYER (Blurred) */}
             <div className="absolute inset-0 w-full h-full overflow-hidden">
-                <img
-                    src={slide.image}
-                    alt=""
-                    className="w-full h-full object-cover blur-3xl scale-110 brightness-50 opacity-80"
-                />
+              <img
+                src={slide.image}
+                alt=""
+                className="w-full h-full object-cover blur-3xl scale-110 brightness-50 opacity-80"
+              />
             </div>
 
-            {/* 2. MAIN CONTAINER LAYER (Sharp Image)
-               - 'container mx-auto': Centers the box
-               - 'object-contain': Ensures the whole banner is visible without cutting text
-            */}
+            {/* 2. MAIN CONTAINER LAYER (Sharp Image) */}
             <div className="relative z-20 w-full h-full flex items-center justify-center p-4 md:p-8">
-                <div className="relative w-full max-w-[1400px] h-full shadow-2xl rounded-xl overflow-hidden">
-                     <img
-                        src={slide.image}
-                        alt={slide.alt}
-                        className="w-full h-full object-fill md:object-contain"
-                        // Note: object-contain keeps aspect ratio (good for PC).
-                        // object-fill forces fit (good for Mobile if banner is designed for it).
-                     />
-                </div>
+              <div className="relative w-full max-w-[1400px] h-full shadow-2xl rounded-xl overflow-hidden">
+                <img
+                  src={slide.image}
+                  alt={slide.alt}
+                  className="w-full h-full object-fill md:object-contain"
+                />
+              </div>
             </div>
-
           </div>
         ))}
 
@@ -222,7 +216,6 @@ const Banner = () => {
             />
           ))}
         </div>
-
       </div>
     </section>
   );
