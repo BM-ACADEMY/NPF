@@ -8,6 +8,7 @@ import SocialMediaLinks from "../Modules/Homepages/Pages/SocialMediaLinks";
 import LicenseDownload from "../Modules/Homepages/Pages/LicenseDownload"; // ✅ Add this import
 import Bar from "../Modules/Homepages/Pages/Bar";
 import StatsSection from "../Modules/Homepages/Pages/StatsSection";
+import PutsfSection from "../Modules/Homepages/Pages/PutsfSection";
 
 const HomepagesRoutes = () => {
   return (
@@ -15,6 +16,7 @@ const HomepagesRoutes = () => {
       <Banner />
       {/* <Bar /> */}
       <Hero />
+      <PutsfSection />
       <BlogHome />
       <StatsSection />
       <SocialMediaLinks />
